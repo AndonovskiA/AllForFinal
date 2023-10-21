@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\AllForFinal\\AllForFinal\\DSstart\\DrivingSchoolWebApi\\wwwroot\\package-lock.json",
+      "PackagePath": "staticwebassets\\package-lock.json"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.DrivingSchoolWebApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.DrivingSchoolWebApi.props",
+      "PackagePath": "build\\DrivingSchoolWebApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.DrivingSchoolWebApi.props",
+      "PackagePath": "buildMultiTargeting\\DrivingSchoolWebApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.DrivingSchoolWebApi.props",
+      "PackagePath": "buildTransitive\\DrivingSchoolWebApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

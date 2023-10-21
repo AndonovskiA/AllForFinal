@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "j2DIJIHERIJDFc5l4vaI1LdU3UZaENJFZpLmA8TrRFE=",
+  "Source": "DrivingSchoolWebApi",
+  "BasePath": "_content/DrivingSchoolWebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DrivingSchoolWebApi\\wwwroot",
+      "Source": "DrivingSchoolWebApi",
+      "ContentRoot": "D:\\AllForFinal\\AllForFinal\\DSstart\\DrivingSchoolWebApi\\wwwroot\\",
+      "BasePath": "_content/DrivingSchoolWebApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\AllForFinal\\AllForFinal\\DSstart\\DrivingSchoolWebApi\\wwwroot\\package-lock.json",
+      "SourceId": "DrivingSchoolWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\AllForFinal\\AllForFinal\\DSstart\\DrivingSchoolWebApi\\wwwroot\\",
+      "BasePath": "_content/DrivingSchoolWebApi",
+      "RelativePath": "package-lock.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\package-lock.json"
+    }
+  ]
+}
