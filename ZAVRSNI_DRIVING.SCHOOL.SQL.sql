@@ -25,7 +25,7 @@ create table VEHICLE(
 	BRAND varchar (25),
 	MODEL varchar (25),
 	PURCHASE_DATE datetime,
-	DATE_OF_REGISTRATION datetime 
+	DATE_OF_REGISTRATION datetime
 	);
 
 create table COURSE(
@@ -114,4 +114,3 @@ insert into COURSE(ID_INSTRUCTOR,ID_VEHICLE,ID_CATEGORY,START_DATE)
 		('1','1','1','2023-02-05 17:00:00'),
 		('2','2','2','2023-01-12 17:00:00'),
 		('3','3','3','2023-01-01 17:00:00');
-

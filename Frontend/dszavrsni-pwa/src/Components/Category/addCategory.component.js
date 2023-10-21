@@ -32,10 +32,10 @@ export default class AddCategory extends Component {
       const datainfo = new FormData(e.target);
   
       this.AddCategory({
-        NAME: datainfo.get('Name'),
-        PRICE: datainfo.get('Price'),
-        NUMBER_OF_TR_LECTURES: datainfo.get('Number of tr lectures'),
-        NUMBER_OF_DL: datainfo.get('Number od driving lessions')
+        NAME: datainfo.get('NAME'),
+        PRICE: datainfo.get('PRICE'),
+        NUMBER_OF_TR_LECTURES: datainfo.get('NUMBER_OF_TR_LECTURES'),
+        NUMBER_OF_DL: datainfo.get('NUMBER_OF_DL')
       });
       
     }
@@ -46,26 +46,26 @@ export default class AddCategory extends Component {
             <Form onSubmit={this.handleSubmit}>
     
     
-              <Form.Group className="mb-3" controlId="name">
+              <Form.Group className="mb-3" controlId="NAME">
                 <Form.Label>NAME</Form.Label>
-                <Form.Control type="text" name="name" placeholder="something" maxLength={255} required/>
+                <Form.Control type="text" name="NAME" placeholder="something" maxLength={255} required/>
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="price">
+              <Form.Group className="mb-3" controlId="PRICE">
                 <Form.Label>PRICE</Form.Label>
-                <Form.Control type="decimal" name="price" placeholder="350.50" required />
+                <Form.Control type="decimal" name="PRICE" placeholder="350.50" required />
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="number of tl lectures">
+              <Form.Group className="mb-3" controlId="NUMBER_OF_TR_LECTURES">
                 <Form.Label>NUMBER_OF_TR_LECTURES</Form.Label>
-                <Form.Control type="text" name="number od tl lectures" placeholder="50" required />
+                <Form.Control type="text" name="NUMBER_OF_TR_LECTURES" placeholder="50" required />
               </Form.Group>
     
-              <Form.Group className="mb-3" controlId="number of driving lessions">
+              <Form.Group className="mb-3" controlId="NUMBER_OF_DL">
                 <Form.Label>NUMBER_OF_DL</Form.Label>
-                <Form.Control type="text" name="number of driving lessions" placeholder="50" required />
+                <Form.Control type="text" name="NUMBER_OF_DL" placeholder="50" required />
               </Form.Group>
 
 

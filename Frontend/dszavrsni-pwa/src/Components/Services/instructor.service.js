@@ -3,7 +3,7 @@ import http from "../http-common";
 
 class instructorDataService{
 
-    async get(){
+    async getAll(){
         return await http.get('/Instructor');
     }
 

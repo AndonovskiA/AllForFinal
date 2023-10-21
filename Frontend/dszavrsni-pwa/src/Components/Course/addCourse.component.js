@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import GrupaDataService from "../../services/grupa.service";
-import SmjerDataService from "../../services/smjer.service";
+import courseDataService from "../../services/Course.service";
+import instructorDataService from "../../services/Instructor.service";
+import vehicleDataService from "../../services/Vehhicle.service";
+import studentDataService from "../../services/Student.service";
+import categoryDataService from "../../services/Category.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -17,9 +20,10 @@ export default class addCourse extends Component {
     super(props);
     this.addCourse = this.addCourse.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    //this.getStudent = this.getStudents.bind(this);
-    // this.getCategory= this.getCategories.bind(this);
-    // this.getInstructor= this.getInstructors.bind(this);
+    this.addStudent = this.getStudents.bind(this);
+    this.getCategory= this.getCategories.bind(this);
+    this.getInstructor= this.getInstructors.bind(this);
+    this.getVehicle= this.getVehicle.bind(this);
     this.state = {
       smjerovi: [],
       sifraSmjer:0,
@@ -28,34 +32,58 @@ export default class addCourse extends Component {
     };
   }
 
-  componentDidMount() {
-    //console.log("Dohvaćam smjerove");
-    this.dohvatiSmjerovi();
-    //dohvati sve sto mi treba
-  }
 
-  async dodajGrupa(grupa) {
-    const odgovor = await GrupaDataService.post(grupa);
-    if(odgovor.ok){
-      // routing na smjerovi
-      window.location.href='/grupe';
+  async addCourse(course) {
+    const answer = await courseDataService.post(course);
+    if(answer.ok){
+     
+      window.location.href='/courses';
     }else{
-      // pokaži grešku
-      console.log(odgovor);
+      
+      console.log(answer);
     }
   }
 
 
-  async dohvatiSmjerovi() {
+  async getInstructors() {
 
-    await SmjerDataService.get()
+    await instructorDataService.get()
       .then(response => {
         this.setState({
-          smjerovi: response.data,
-          sifraSmjer: response.data[0].sifra
+          instructors: response.data,
+          IDInstructor: response.data[0].ID
         });
 
-       // console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  async getVehicles() {
+
+    await vehicleDataService.get()
+      .then(response => {
+        this.setState({
+          vehicles: response.data,
+          IDVehicle: response.data[0].ID
+        });
+
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
+  async getCategories() {
+
+    await categoryDataService.get()
+      .then(response => {
+        this.setState({
+          categories: response.data,
+          IDCategory: response.data[0].ID
+        });
+
       })
       .catch(e => {
         console.log(e);
@@ -65,16 +93,14 @@ export default class addCourse extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const podaci = new FormData(e.target);
-    console.log(podaci.get('datumPocetka'));
-    console.log(podaci.get('vrijeme'));
-    let datum = moment.utc(podaci.get('datumPocetka') + ' ' + podaci.get('vrijeme'));
-    console.log(datum);
+    const dataInfo = new FormData(e.target);
+    console.log(dataInfo.get('startDate'));
+    console.log(dataInfo.get('Time'));
+    let datetime = moment.utc(dataInfo.get('startDate') + ' ' + dataInfo.get('Time'));
+    console.log(datetime);
 
-    this.dodajGrupa({
-      naziv: podaci.get('naziv'),
-      datumPocetka: datum,
-      sifraSmjer: this.state.sifraSmjer
+    this.addCourse({
+      startDate: dateTime,
     });
     
   }
@@ -86,32 +112,30 @@ export default class addCourse extends Component {
     <Container>
         <Form onSubmit={this.handleSubmit}>
 
-
-          <Form.Group className="mb-3" controlId="naziv">
-            <Form.Label>Naziv</Form.Label>
-            <Form.Control type="text" name="naziv" placeholder="" maxLength={255} required/>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="smjer">
-            <Form.Label>Smjer</Form.Label>
+         
+        <Form.Group className="mb-3" controlId="VEHICLE">
+            <Form.Label>VEHICLE</Form.Label>
             <Form.Select onChange={e => {
-              this.setState({ sifraSmjer: e.target.value});
+              this.setState({ IDVehicle: e.target.value});
             }}>
-            {smjerovi && smjerovi.map((smjer,index) => (
-                  <option key={index} value={smjer.sifra}>{smjer.naziv}</option>
+            {vehicles && vehicles.map((vehicle,index) => (
+                  <option key={index} value={vehicle.ID}>{vehicle.BRAND}</option>
 
             ))}
             </Form.Select>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="datumPocetka">
-            <Form.Label>Datum početka</Form.Label>
-            <Form.Control type="date" name="datumPocetka" placeholder=""  />
+
+
+
+          <Form.Group className="mb-3" controlId="startDate">
+            <Form.Label>startDate</Form.Label>
+            <Form.Control type="date" name="startDate" placeholder=""  />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="vrijeme">
-            <Form.Label>Vrijeme</Form.Label>
-            <Form.Control type="time" name="vrijeme" placeholder=""  />
+          <Form.Group className="mb-3" controlId="TIME">
+            <Form.Label>TIME</Form.Label>
+            <Form.Control type="time" name="TIME" placeholder=""  />
           </Form.Group>
 
          
@@ -120,11 +144,11 @@ export default class addCourse extends Component {
 
           <Row>
             <Col>
-              <Link className="btn btn-danger gumb" to={`/grupe`}>Odustani</Link>
+              <Link className="btn btn-danger gumb" to={`/courses`}>Cancel</Link>
             </Col>
             <Col>
             <Button variant="primary" className="gumb" type="submit">
-              Dodaj grupu
+              Add course
             </Button>
             </Col>
           </Row>

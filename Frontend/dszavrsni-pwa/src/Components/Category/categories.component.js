@@ -45,7 +45,7 @@ export default class Categories extends Component {
         if(answer.ok){
          this.getCategory();
         }else{
-         // alert(odgovor.poruka);
+        
           this.openModal();
         }
         
@@ -56,7 +56,7 @@ export default class Categories extends Component {
         return (
     
         <Container>
-          <a href="/categories/add" className="btn btn-success gumb">Add new category</a>
+          <a href="/categories/add" className="btn btn-success gumb">ADD NEW CATEGORY</a>
         <Row>
           { categories && categories.map((c) => (
                
@@ -87,7 +87,7 @@ export default class Categories extends Component {
               <Modal.Header closeButton>
                 <Modal.Title>There has been an error while executing delete action</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Bla bla</Modal.Body>
+              <Modal.Body>Please try again</Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={this.closeModal}>
                   Close

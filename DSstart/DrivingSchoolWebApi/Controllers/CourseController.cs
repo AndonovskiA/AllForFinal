@@ -449,52 +449,6 @@ namespace DrivingSchoolWebApi.Controllers
             }
 
         }
-
-        [HttpDelete]
-        [Route("{ID:int}/add/{studentID:int}")]
-        public IActionResult DeleteStudentFromCourse(int ID, int studentID)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            if (ID <= 0 || studentID <= 0)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                var course = _context.Course
-                    .Include(c => c.Students)
-                    .FirstOrDefault(c => c.ID == ID);
-
-                if (course == null)
-                {
-                    return BadRequest();
-                }
-
-                var student = _context.Student.Find(studentID);
-
-                if (student == null)
-                {
-                    return BadRequest();
-                }
-
-                course.Students.Remove(student);
-                _context.Course.Update(course);
-                _context.SaveChanges();
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(
-                       StatusCodes.Status503ServiceUnavailable,
-                       ex.Message);
-            }
-        }
     }
 }
     

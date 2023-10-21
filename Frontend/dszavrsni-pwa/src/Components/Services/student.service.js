@@ -5,14 +5,11 @@ class studentDataService {
     return await http.get('/student');
   }
 
-
-
   async getByID(ID) {
     return await http.get('/student/' + ID);
   }
 
   async post(student){
-    //console.log(smjer);
     const odgovor = await http.post('/student',student)
        .then(response => {
          return {ok:true, message: 'Student added'}; // return u odgovor
@@ -28,11 +25,11 @@ class studentDataService {
   async put(ID,student){
     const odgovor = await http.put('/student/' + ID,student)
        .then(response => {
-         return {ok:true, message: 'Student changed'}; // return u odgovor
+         return {ok:true, message: 'Student changed'};
        })
        .catch(error => {
         console.log(error.response);
-         return {ok:false, poruka: error.response.data}; // return u odgovor
+         return {ok:false, poruka: error.response.data}; 
        });
  
        return odgovor;

@@ -23,30 +23,43 @@ class vehicleDataService{
         return answer;
     }
 
-
     async post(vehicle){
-        //console.log(vehicle);
+       
         const answer = await http.post('/vehicle',vehicle)
            .then(response => {
-             return {ok:true, message: 'Vehicle added'}; // return u odgovor
+             return {ok:true, message: 'Vehicle added'}; 
            })
            .catch(error => {
-            //console.log(error.response);
-             return {ok:false, message: error.response.data}; // return u odgovor
+            
+             return {ok:false, message: error.response.data}; 
            });
      
            return answer;
     }
 
+    async setPhoto(ID,photo){
+    
+      const answer = await http.put('/vehicle/setPhoto/' + ID,photo)
+         .then(response => {
+           return {ok:true, message: 'Succesfully set photo'};
+         })
+         .catch(error => {
+           console.log(error);
+           return {ok:false, message: error.response.data};
+         });
+   
+         return answer;
+       }
+
     async put(ID,vehicle){
-        //console.log(vehicle);
+        
         const answer = await http.put('/vehicle/' + ID,vehicle)
            .then(response => {
-             return {ok:true, message: 'Vehicle changed'}; // return u odgovor
+             return {ok:true, message: 'Vehicle changed'}; 
            })
            .catch(error => {
-            //console.log(error.response);
-             return {ok:false, message: error.response.data}; // return u odgovor
+            
+             return {ok:false, message: error.response.data}; 
            });
      
            return answer;

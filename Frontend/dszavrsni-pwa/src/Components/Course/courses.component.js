@@ -15,26 +15,26 @@ import { Modal } from 'react-bootstrap';
 export default class Grupe extends Component {
   constructor(props) {
     super(props);
-    this.dohvatiGrupe = this.dohvatiGrupe.bind(this);
+    this.getCourses = this.getCourses.bind(this);
 
     this.state = {
-      grupe: [],
-      prikaziModal: false
+      courses: [],
+      showModal: false
     };
   }
 
-  otvoriModal = () => this.setState({ prikaziModal: true });
-  zatvoriModal = () => this.setState({ prikaziModal: false });
+  openModal = () => this.setState({ showModal: true });
+  closeModal = () => this.setState({ showModal: false });
 
 
   componentDidMount() {
-    this.dohvatiGrupe();
+    this.getCourses();
   }
-  dohvatiGrupe() {
-    GrupaDataService.getAll()
+  getCourses() {
+    courseDataService.getAll()
       .then(response => {
         this.setState({
-          grupe: response.data
+          courses: response.data
         });
         console.log(response);
       })
@@ -43,33 +43,32 @@ export default class Grupe extends Component {
       });
   }
 
-  async obrisiGrupa(sifra){
+  async deleteCourse(ID){
     
-    const odgovor = await GrupaDataService.delete(sifra);
-    if(odgovor.ok){
-     this.dohvatiGrupe();
+    const answer = await courseDataService.delete(ID);
+    if(answer.ok){
+     this.getCourses();
     }else{
-     this.otvoriModal();
+     this.openModal();
     }
     
    }
 
   render() {
-    const { grupe} = this.state;
+    const {courses} = this.state;
     return (
 
     <Container>
-      <a href="/grupe/dodaj" className="btn btn-success gumb">Dodaj novu grupu</a>
+      <a href="/courses/add" className="btn btn-success gumb">  ADD NEW COURSE  </a>
       <Table striped bordered hover responsive>
               <thead>
                 <tr>
-                  <th>Naziv</th>
-                  <th>Datum početka</th>
-                  <th>Akcija</th>
+                  <th>startDate</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-              {grupe && grupe.map((g,index) => (
+              {courses && courses.map((c,index) => (
                 
                 <tr key={index}>
                   <td> 
@@ -77,7 +76,7 @@ export default class Grupe extends Component {
                     {g.smjer}
                   </td>
                   <td className="naslovSmjer">
-                    {g.datumPocetka==null ? "Nije definirano" :
+                    {c.startDate==null ? "Start date and time are not defined" :
                     moment.utc(g.datumPocetka).format("DD. MM. YYYY. HH:mm")}
                   </td>
                   <td>
@@ -99,14 +98,13 @@ export default class Grupe extends Component {
               </tbody>
             </Table>     
 
-             <Modal show={this.state.prikaziModal} onHide={this.zatvoriModal}>
+             <Modal show={this.state.showModal} onHide={this.closeModal}>
               <Modal.Header closeButton>
-                <Modal.Title>Greška prilikom brisanja</Modal.Title>
+                <Modal.Title>Error has occured while deleting</Modal.Title>
               </Modal.Header>
-              <Modal.Body>Grupa ima polaznike.</Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={this.zatvoriModal}>
-                  Zatvori
+                <Button variant="secondary" onClick={this.closeModal}>
+                  Close
                 </Button>
               </Modal.Footer>
             </Modal>
