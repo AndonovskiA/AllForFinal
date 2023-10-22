@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import MainMenu from './Components/MainMenu.component'; 
 import MainPage from './Components/MainPage.component';
-import ControlBoard from './Components/ControlBoard.component';
 import AddCategory from './Components/Category/addCategory.component';
 import Categories from './Components/Category/categories.component';
 import ChangeCategory from './Components/Category/changeCategory.component';
@@ -24,20 +23,15 @@ export default function App() {
       <MainMenu />
       <Routes>
         <Route path= '/' element={<MainPage />} />
-        <Route path= '/ControlBoard' element={<ControlBoard />} />
-
         <Route path= "/Categories/add" element={<AddCategory />} />
         <Route path= "/Categories" element= {<Categories />} />
         <Route path= "/Categories/change" element={<ChangeCategory />} /> 
-
         <Route path= "/Instructors" element={<Instructors />} />
         <Route path= "/Instructors/add" element={<AddInstructor />} />
         <Route path= "/Instructors/change" element={<ChangeInstructor />} />
-
-        <Route path= '/students' element={<Students />} />
+        <Route path= '/Students' element={<Students />} />
         <Route path= "/Student/add" element={<AddStudent />} />
-        <Route path= "/Students/:ID" element={<ChangeStudent />} />
-
+        <Route path= "/Vtudents/:ID" element={<ChangeStudent />} />
         <Route path= "/Vehicles" element={<Vehicles />} />
         <Route path= "/Vehicles/add" element={<AddVehicle />} />
         <Route path= "/Vehicles/change" element={<ChangeVehicle />} />

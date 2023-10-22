@@ -100,7 +100,7 @@ export default class addCourse extends Component {
     console.log(datetime);
 
     this.addCourse({
-      startDate: dateTime,
+      startDate: datetime,
     });
     
   }

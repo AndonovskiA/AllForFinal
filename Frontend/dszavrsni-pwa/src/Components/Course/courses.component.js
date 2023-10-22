@@ -72,7 +72,7 @@ export default class Grupe extends Component {
                 
                 <tr key={index}>
                   <td> 
-                    <p className="naslovSmjer">{g.naziv} ({g.brojPolaznika})</p>
+                    <p className="naslovSmjer">{category.NAME} ({g.brojPolaznika})</p>
                     {g.smjer}
                   </td>
                   <td className="naslovSmjer">
@@ -82,11 +82,11 @@ export default class Grupe extends Component {
                   <td>
                     <Row>
                       <Col>
-                        <Link className="btn btn-primary gumb" to={`/grupe/${g.sifra}`}><FaEdit /></Link>
+                        <Link className="btn btn-primary gumb" to={`/courses/${c.ID}`}><FaEdit /></Link>
                       </Col>
                       <Col>
-                        { g.brojPolaznika===0 &&
-                             <Button variant="danger"  className="gumb" onClick={() => this.obrisiGrupa(g.sifra)}><FaTrash /></Button>
+                        { 
+                             <Button variant="danger"  className="gumb" onClick={() => this.deleteCourse(c.ID)}><FaTrash /></Button>
                         }
                       </Col>
                     </Row>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import vehicleDataService from "../../services/Vehicles.service";
+import vehicleDataService from "../Services/vehicle.service";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -42,10 +42,9 @@ export default class Vehicless extends Component {
       async deleteVehicle(ID){
     
         const answer = await vehicleDataService.delete(ID);
-        if(odgovor.ok){
+        if(answer.ok){
          this.getVehicles();
         }else{
-         // alert(odgovor.poruka);
           this.openModal();
         }
         

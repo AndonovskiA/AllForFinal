@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import categoryDataService from "../../services/Category.service";
+import categoryDataService from "../Services/category.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -48,7 +48,7 @@ export default class changeCategory extends Component {
     
     let href = window.location.href;
     let niz = href.split('/'); 
-    const answer = await categoryDataService.put(niz[niz.length-1],student);
+    const answer = await categoryDataService.put(niz[niz.length-1]);
     if(answer.ok){
       window.location.href='/categories';
     }else{

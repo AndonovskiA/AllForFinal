@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import categoryDataService from "../../services/Category.service";
+import categoryDataService from "../Services/category.service";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -66,14 +66,14 @@ export default class Categories extends Component {
                     <Card.Body>
                       <Card.Title>{c.NAME} {c.PRICE}</Card.Title>
                       <Card.Text>
-                        {c.NUMBER_OF_TR_LECTURES} {VBArray.NUMBER_OF_DR_LECTURES}
+                        {c.NUMBER_OF_TR_LECTURES} {c.NUMBER_OF_DR_LECTURES}
                       </Card.Text>
                       <Row>
                           <Col>
-                          <Link className="btn btn-primary gumb" to={`/categories/${s.ID}`}><FaEdit /></Link>
+                          <Link className="btn btn-primary gumb" to={`/categories/${c.ID}`}><FaEdit /></Link>
                           </Col>
                           <Col>
-                          <Button variant="danger" className="gumb"  onClick={() => this.deleteCategory(s.ID)}><FaTrash /></Button>
+                          <Button variant="danger" className="gumb"  onClick={() => this.deleteCategory(c.ID)}><FaTrash /></Button>
                           </Col>
                         </Row>
                     </Card.Body>

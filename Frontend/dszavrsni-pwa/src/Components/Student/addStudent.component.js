@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import studentDataService from "../../services/Student.service";
+import studentDataService from "../Services/student.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';

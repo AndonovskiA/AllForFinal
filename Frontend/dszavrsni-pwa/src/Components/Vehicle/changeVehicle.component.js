@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import vehicleDataService from "../../services/Vehicle.service";
+import vehicleDataService from "../Services/vehicle.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -81,7 +81,6 @@ export default class changeVehicle extends Component {
 
   render() {
     
-    const {vehicle} = this.state;
 
     return (
     <Container>

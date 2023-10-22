@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import instructorDataService from "../../services/Instructor.service";
+import instructorDataService from "../Services/instructor.service";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -64,7 +64,7 @@ export default class Instructors extends Component {
     
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>
-                      <Card.Title>{s.First_Name} {s.Last_Name}</Card.Title>
+                      <Card.Title>{i.First_Name} {i.Last_Name}</Card.Title>
                       <Card.Text>
                         {i.Driver_License_Number} {i.EMAIL} {i.Contact_Number}
                       </Card.Text>

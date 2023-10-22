@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import categoryDataService from "../../services/Category.service";
+import categoryDataService from "../Services/category.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,20 +7,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 
-export default class AddCategory extends Component {
+export default class addCategory extends Component {
 
     constructor(props) {
       super(props);
-      this.AddCategory = this.AddCategory.bind(this);
+      this.AddCategory = this.addCategory.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     async AddCategory(course) {
       const answer = await categoryDataService.post(course);
       if(answer.ok){
-        // routing na tečaj
+        
         window.location.href='/categories';
       }else{
-        // pokaži grešku
+        
         console.log(answer);
       }
     }
@@ -31,7 +31,7 @@ export default class AddCategory extends Component {
       e.preventDefault();
       const datainfo = new FormData(e.target);
   
-      this.AddCategory({
+      this.addCategory({
         NAME: datainfo.get('NAME'),
         PRICE: datainfo.get('PRICE'),
         NUMBER_OF_TR_LECTURES: datainfo.get('NUMBER_OF_TR_LECTURES'),

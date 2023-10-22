@@ -1,4 +1,4 @@
-import http from '../http-common';
+import http from '../../http-common';
 
 class studentDataService {
   async getAll() {
@@ -10,7 +10,7 @@ class studentDataService {
   }
 
   async post(student){
-    const odgovor = await http.post('/student',student)
+    const answer = await http.post('/student',student)
        .then(response => {
          return {ok:true, message: 'Student added'}; // return u odgovor
        })
@@ -23,7 +23,7 @@ class studentDataService {
   }
 
   async put(ID,student){
-    const odgovor = await http.put('/student/' + ID,student)
+    const answer = await http.put('/student/' + ID,student)
        .then(response => {
          return {ok:true, message: 'Student changed'};
        })
@@ -32,7 +32,7 @@ class studentDataService {
          return {ok:false, poruka: error.response.data}; 
        });
  
-       return odgovor;
+       return answer;
      }
 
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import vehicleDataService from "../../services/Vehicle.service";
+import vehicleDataService from "../Services/vehicle.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -17,10 +17,8 @@ export default class AddVehicle extends Component {
     async AddVehicle(course) {
       const answer = await vehicleDataService.post(course);
       if(answer.ok){
-        // routing na tečaj
         window.location.href='/course';
       }else{
-        // pokaži grešku
         console.log(answer);
       }
     }

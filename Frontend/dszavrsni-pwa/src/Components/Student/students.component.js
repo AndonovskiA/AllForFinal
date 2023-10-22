@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import studentDataService from "../../services/Student.service";
+import studentDataService from "../Services/student.service";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -41,11 +41,10 @@ export default class Students extends Component {
 
       async deleteStudent(ID){
     
-        const answer = await studentDataService.delete(sifra);
-        if(odgovor.ok){
+        const answer = await studentDataService.delete(ID);
+        if(answer.ok){
          this.getStudents();
         }else{
-         // alert(odgovor.poruka);
           this.openModal();
         }
         

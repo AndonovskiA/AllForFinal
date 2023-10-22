@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import instructorDataService from "../../services/Instructor.service";
+import instructorDataService from "../Services/instructor.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,17 +7,17 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 
-export default class AddInstructor extends Component {
+export default class addInstructor extends Component {
 
     constructor(props) {
       super(props);
-      this.AddInstructor = this.AddInstructor.bind(this);
+      this.addInstructor = this.AddInstructor.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
     async AddInstructor(course) {
       const answer = await instructorDataService.post(course);
       if(answer.ok){
-        // routing na tecaj
+        
         window.location.href='/instructors';
       }else{
         // pokaži grešku
@@ -46,19 +46,19 @@ export default class AddInstructor extends Component {
         <Container>
             <Form onSubmit={this.handleSubmit}>
     
-            <Form.Group className="mb-3" controlId="First name">
+            <Form.Group className="mb-3" controlId="FIRST_NAME">
                 <Form.Label>First_Name</Form.Label>
-                <Form.Control type="text" name="first name" placeholder="Petak" maxLength={30}/>
+                <Form.Control type="text" name="FIRST_NAME" placeholder="Petak" maxLength={30}/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="Last name">
+            <Form.Group className="mb-3" controlId="LAST_NAME">
                 <Form.Label>Last_Name</Form.Label>
-                <Form.Control type="text" name="last name" placeholder="Petakić"/>
+                <Form.Control type="text" name="LAST_NAME" placeholder="Petakić"/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="driver license number">
+            <Form.Group className="mb-3" controlId="DRIVES_LICENSE_NUMBER">
                 <Form.Label>Driver_License_Number</Form.Label>
-                <Form.Control type="text" name="driver licence number" placeholder="6546464 "/>
+                <Form.Control type="text" name="DRIVER_LICENSE_NUMBER"placeholder="6546464 "/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="EMAIL">
@@ -66,9 +66,9 @@ export default class AddInstructor extends Component {
                 <Form.Control type="text" name="EMAIL" placeholder="abcd.pet@gmail.com"/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="contact number">
+            <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
                 <Form.Label>Contact_Number</Form.Label>
-                <Form.Control type="text" name="contact number" placeholder="1234567890"/>
+                <Form.Control type="text" name="CONTACT_NUMBER" placeholder="1234567890"/>
             </Form.Group>
         
               
