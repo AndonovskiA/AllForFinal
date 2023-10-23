@@ -59,24 +59,17 @@ export default class changeInstructor extends Component {
 
 
   handleSubmit(e) {
-    // Prevent the browser from reloading the page
+    
     e.preventDefault();
 
-    // Read the form data
     const datainfo = new FormData(e.target);
-    //Object.keys(formData).forEach(fieldName => {
-    // console.log(fieldName, formData[fieldName]);
-    //})
-    
-    //console.log(podaci.get('verificiran'));
-    // You can pass formData as a service body directly:
-
+   
     this.changeInstructor({
-      First_Name: datainfo.get('First name'),
-      Last_Name: datainfo.get('Last name'),
-      Driver_License_Number: datainfo.get('Driver licence number'),
-      EMAIL:datainfo.get("e-mail"),
-      Contact_Number: datainfo.get('Contact number'),
+      FIRST_NAME: datainfo.get('FIRST_NAME'),
+      LAST_NAME: datainfo.get('LAST_NAME'),
+      DRIVER_LICENSE_NUMBER: datainfo.get('DRIVER_LICENSE_NUMBER'),
+      EMAIL:datainfo.get("EMAIL"),
+      CONTACT_NUMBER: datainfo.get('CONTACT_NUMBER'),
     });
     
   }
@@ -90,31 +83,36 @@ export default class changeInstructor extends Component {
     <Container>
         <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="First name">
-                <Form.Label>First_Name</Form.Label>
-                <Form.Control type="text" name="first name" placeholder="Petak" maxLength={30}/>
+        <Form.Group className="mb-3" controlId="FIRST_NAME">
+                <Form.Label>FIRST_NAME</Form.Label>
+                <Form.Control type="text" name="FIRST_NAME" placeholder="Petak" 
+                defaultValue={instructor.FIRST_NAME} maxLength={30}/>
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="Last name">
-                <Form.Label>Last_Name</Form.Label>
-                <Form.Control type="text" name="last name" placeholder="Petakić"/>
+              <Form.Group className="mb-3" controlId="LAST_NAME">
+                <Form.Label>LAST_NAME</Form.Label>
+                <Form.Control type="text" name="LAST_NAME" placeholder="Petakić"
+                 defaultValue={instructor.LAST_NAME} />
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="driver license number">
-                <Form.Label>Driver_License_Number</Form.Label>
-                <Form.Control type="text" name="driver licence number" placeholder="6546464 "/>
+              <Form.Group className="mb-3" controlId="DRIVER_LICENSE_NUMBER">
+                <Form.Label>DRIVER_LICENSE_NUMBER</Form.Label>
+                <Form.Control type="text" name="DRIVER_LICENSE_NUMBER" placeholder="6546464 "
+                 defaultValue={instructor.DRIVER_LICENSE_NUMBER}/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="EMAIL">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="text" name="EMAIL" placeholder="abcd.pet@gmail.com"/>
+                <Form.Label>EMAIL</Form.Label>
+                <Form.Control type="text" name="EMAIL" placeholder="abcd.pet@gmail.com"
+                defaultValue={instructor.EMAIL} />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="contact number">
-                <Form.Label>Contact_Number</Form.Label>
-                <Form.Control type="text" name="contact number" placeholder="1234567890"/>
+              <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
+                <Form.Label>CONTACT_NUMBER</Form.Label>
+                <Form.Control type="text" name="CONTACT_NUMBER" placeholder="1234567890"
+                defaultValue={instructor.CONTACT_NUMBERs} />
               </Form.Group>
         
          

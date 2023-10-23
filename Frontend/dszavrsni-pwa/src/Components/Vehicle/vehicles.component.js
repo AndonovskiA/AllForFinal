@@ -1,34 +1,25 @@
 import React, { Component } from "react";
 import vehicleDataService from "../Services/vehicle.service";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import { Button, Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
-import { Modal } from 'react-bootstrap';
+
 
 export default class Vehicless extends Component {
     constructor(props) {
       super(props);
-      this.addVehicle = this.getVehicles.bind(this);
   
       this.state = {
         vehicles: [],
-        showModal: false
       };
     }
-
-    openModal = () => this.setState({ showModal: true });
-    closeModal = () => this.setState({ showModal: false });
     
     componentDidMount() {
         this.getVehicles();
       }
-      getVehicles() {
-        vehicleDataService.getAll()
+      async getVehicles() {
+        await vehicleDataService.get() //mozda bez all
           .then(response => {
             this.setState({
               vehicles: response.data
@@ -45,7 +36,7 @@ export default class Vehicless extends Component {
         if(answer.ok){
          this.getVehicles();
         }else{
-          this.openModal();
+          alert(answer.message);
         }
         
        }
@@ -55,44 +46,41 @@ export default class Vehicless extends Component {
         return (
     
         <Container>
-          <a href="/vehicles/add" className="btn btn-success gumb">Add new vehicle</a>
-        <Row>
-          { vehicles && vehicles.map((v) => (
-               
-               <Col key={v.ID} sm={12} lg={3} md={3}>
-    
-                  <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                      <Card.Title>{v.TYPE} {v.BRAND}</Card.Title>
-                      <Card.Text>
-                        {v.MODEL} {v.PURCHASE_DATE} {v.DATE_OF_REGISTRATION}
-                      </Card.Text>
-                      <Row>
-                          <Col>
-                          <Link className="btn btn-primary gumb" to={`/vehicles/${v.ID}`}><FaEdit /></Link>
-                          </Col>
-                          <Col>
-                          <Button variant="danger" className="gumb"  onClick={() => this.deleteVehicle(v.ID)}><FaTrash /></Button>
-                          </Col>
-                        </Row>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))
-          }
-          </Row>
-    
-          <Modal show={this.state.showModal} onHide={this.closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>There has been an error while executing delete action</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Bla bla</Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={this.closeModal}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
+          <a href="/vehicles/add" className="btn btn-success gumb">
+            Add new vehicle</a>
+            <Table striped bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th>BRAND</th>
+                        <th>MODEL</th>
+                        <th>PURCHASE_DATE</th>
+                        <th>DATE_OF_REGISTRATION</th>
+                        <th>Akcija</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   { vehicles && vehicles.map((vehicle,index) => (
+
+                    <tr key={index}>
+                        <td>{vehicle.BRAND}</td>
+                        <td>
+                            <Link className="btn btn-primary gumb"
+                            to={`/vehicles/${vehicle.ID}`}>
+                                <FaEdit />
+                            </Link>
+
+                            <Button variant="danger" className="gumb"
+                            onClick={()=>this.deleteVehicle(vehicle.ID)}>
+                                <FaTrash />
+                            </Button>
+                        </td>
+                    </tr>
+
+                   ))}
+                </tbody>
+               </Table>
+
+
 
     </Container>
 

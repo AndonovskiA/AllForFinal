@@ -18,12 +18,9 @@ export default class changeCategory extends Component {
     this.category = this.getCategory();
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
-    
-
 
     this.state = {
-      categories: {}
+      category: {}
     };
   }
 
@@ -48,7 +45,7 @@ export default class changeCategory extends Component {
     
     let href = window.location.href;
     let niz = href.split('/'); 
-    const answer = await categoryDataService.put(niz[niz.length-1]);
+    const answer = await categoryDataService.put(niz[niz.length-1],category);
     if(answer.ok){
       window.location.href='/categories';
     }else{
@@ -57,19 +54,11 @@ export default class changeCategory extends Component {
     }
   }
 
-
   handleSubmit(e) {
-    // Prevent the browser from reloading the page
+
     e.preventDefault();
 
-    // Read the form data
     const datainfo = new FormData(e.target);
-    //Object.keys(formData).forEach(fieldName => {
-    // console.log(fieldName, formData[fieldName]);
-    //})
-    
-    //console.log(podaci.get('verificiran'));
-    // You can pass formData as a service body directly:
 
     this.changeCategory({
       NAME: datainfo.get('NAME'),
@@ -83,7 +72,7 @@ export default class changeCategory extends Component {
 
   render() {
     
-    const {category} = this.state;
+    const { category}= this.state;
 
     return (
     <Container>
@@ -91,24 +80,28 @@ export default class changeCategory extends Component {
 
         <Form.Group className="mb-3" controlId="NAME">
                 <Form.Label>NAME</Form.Label>
-                <Form.Control type="text" name="NAME" placeholder="something" maxLength={255} required/>
+                <Form.Control type="text" name="NAME" placeholder="category name" maxLength={255}
+                 defaultValue={category.NAME}  required/>
               </Form.Group>
     
     
               <Form.Group className="mb-3" controlId="PRICE">
                 <Form.Label>PRICE</Form.Label>
-                <Form.Control type="decimal" name="PRICE" placeholder="350.50" required />
+                <Form.Control type="decimal" name="PRICE" placeholder="350.50"
+               defaultValue={category.PRICE} required />
               </Form.Group>
-    
+
     
               <Form.Group className="mb-3" controlId="NUMBER_OF_TR_LECTURES">
                 <Form.Label>NUMBER_OF_TR_LECTURES</Form.Label>
-                <Form.Control type="text" name="NUMBER_OF_TR_LECTURES" placeholder="50" required />
+                <Form.Control type="text" name="NUMBER_OF_TR_LECTURES" placeholder="50" 
+                defaultValue={category.NUMBER_OF_TR_LECTURES} required />
               </Form.Group>
     
               <Form.Group className="mb-3" controlId="NUMBER_OF_DL">
                 <Form.Label>NUMBER_OF_DL</Form.Label>
-                <Form.Control type="text" name="NUMBER_OF_DL" placeholder="50" required />
+                <Form.Control type="text" name="NUMBER_OF_DL" placeholder="50" 
+                defaultValue={category.NUMBER_OF_DL} required />
               </Form.Group>
 
 

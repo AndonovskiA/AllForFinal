@@ -11,10 +11,10 @@ export default class addCategory extends Component {
 
     constructor(props) {
       super(props);
-      this.AddCategory = this.addCategory.bind(this);
+      this.addCategory = this.addCategory.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async AddCategory(course) {
+    async addCategory(course) {
       const answer = await categoryDataService.post(course);
       if(answer.ok){
         
@@ -27,15 +27,17 @@ export default class addCategory extends Component {
   
   
   
-    handleSubmit(e) {
-      e.preventDefault();
-      const datainfo = new FormData(e.target);
+  handleSubmit(e) {
+    e.preventDefault();
+
+
+    const datainfo = new FormData(e.target);
   
       this.addCategory({
         NAME: datainfo.get('NAME'),
-        PRICE: datainfo.get('PRICE'),
-        NUMBER_OF_TR_LECTURES: datainfo.get('NUMBER_OF_TR_LECTURES'),
-        NUMBER_OF_DL: datainfo.get('NUMBER_OF_DL')
+        PRICE: parseFloat(datainfo.get('PRICE')),
+        NUMBER_OF_TR_LECTURES: parseInt(datainfo.get('NUMBER_OF_TR_LECTURES')),
+        NUMBER_OF_DL: parseInt(datainfo.get('NUMBER_OF_DL'))
       });
       
     }

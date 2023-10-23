@@ -1,104 +1,107 @@
 import React, { Component } from "react";
 import categoryDataService from "../Services/category.service";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+import {Button, Container, Table} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
-import { Modal } from 'react-bootstrap';
+import { NumericFormat } from "react-number-format";
+
+
 
 export default class Categories extends Component {
-    constructor(props) {
-      super(props);
-      this.addCategory = this.getCategories.bind(this);
+  constructor(props) {
+    super(props);
+    this.getCategories = this.getCategories.bind(this);
+
+    this.state = {
+      categories: [],
+    };
+  }
+
   
-      this.state = {
-        categories: [],
-        showModal: false
-      };
+  componentDidMount() {
+      this.getCategories();
+    }
+    async getCategories() {
+      await categoryDataService.get()
+        .then(response => {
+          this.setState({
+            categories: response.data
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
 
-    openModal = () => this.setState({ showModal: true });
-    closeModal = () => this.setState({ showModal: false });
-    
-    componentDidMount() {
-        this.getCategories();
+    async deleteCategory(ID){
+  
+      const answer = await categoryDataService.delete(ID);
+      if(answer.ok){
+       this.getCategory();
+      }else{
+      
+        alert(answer.message);
       }
-      getCategories() {
-        categoryDataService.getAll()
-          .then(response => {
-            this.setState({
-              categories: response.data
-            });
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      }
+      
+     }
 
-      async deleteCategory(ID){
-    
-        const answer = await categoryDataService.delete(ID);
-        if(answer.ok){
-         this.getCategory();
-        }else{
+     render() {
+      const {categories} = this.state;
+      return (
+  
+      <Container>
+        <a href="/categories/add" className="btn btn-success gumb">ADD NEW CATEGORY</a>
+        <Table striped bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>PRICE</th>
+                        <th>NUMBER_OF_TR_LECTURES</th>
+                        <th>NUMBER_OF_DL</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   { categories && categories.map((category,index) => (
+
+                    <tr key={index}>
+                        <td>{category.NAME}</td>
+                        <td className="number">{category.PRICE }</td>
+                        <td className="number">
+                            <NumericFormat
+                                value={category.PRICE}
+                                displayType={'text'}
+                                thousandSeparator='.'
+                                decimalSeparator=','
+                                prefix={'€'}
+                                decimalScale={2} 
+                                fixedDecimalScale/>
+                        </td>
+                        
+                        <td>
+                            <Link className="btn btn-primary gumb"
+                            to={`/categories/${category.ID}`}>
+                                <FaEdit />
+                            </Link>
+
+                            <Button variant="danger" className="gumb"
+                            onClick={()=>this.deleteCategory(category.ID)}>
+                                <FaTrash />
+                            </Button>
+                        </td>
+                    </tr>
+
+                   ))}
+                </tbody>
+               </Table>
+  
         
-          this.openModal();
-        }
-        
-       }
 
-       render() {
-        const {categories} = this.state;
-        return (
-    
-        <Container>
-          <a href="/categories/add" className="btn btn-success gumb">ADD NEW CATEGORY</a>
-        <Row>
-          { categories && categories.map((c) => (
-               
-               <Col key={c.ID} sm={12} lg={3} md={3}>
-    
-                  <Card style={{ width: '18rem' }}>
-                    <Card.Body>
-                      <Card.Title>{c.NAME} {c.PRICE}</Card.Title>
-                      <Card.Text>
-                        {c.NUMBER_OF_TR_LECTURES} {c.NUMBER_OF_DR_LECTURES}
-                      </Card.Text>
-                      <Row>
-                          <Col>
-                          <Link className="btn btn-primary gumb" to={`/categories/${c.ID}`}><FaEdit /></Link>
-                          </Col>
-                          <Col>
-                          <Button variant="danger" className="gumb"  onClick={() => this.deleteCategory(c.ID)}><FaTrash /></Button>
-                          </Col>
-                        </Row>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))
-          }
-          </Row>
-    
-          <Modal show={this.state.showModal} onHide={this.closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>There has been an error while executing delete action</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Please try again</Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={this.closeModal}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
-
-    </Container>
+  </Container>
 
 
-    );
-    
-        }
+  );
+  
+  }
 }

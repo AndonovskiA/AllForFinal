@@ -22,6 +22,7 @@ export default class MainMenu extends Component{
                     <NavDropdown.Item href="/vehicles">Vehicles</NavDropdown.Item>
                     <NavDropdown.Item href="/students">Students</NavDropdown.Item>
                     <NavDropdown.Item href="/instructors">Instructors</NavDropdown.Item>
+                    <NavDropdown.Item href="/categories">Categories</NavDropdown.Item>
                     <NavDropdown.Item href="/course">Courses</NavDropdown.Item>
                     <NavDropdown.Divider />
                     <NavDropdown.Item target="_blank" href="/swagger/index.html">

@@ -33,7 +33,7 @@ export default class AddVehicle extends Component {
         TYPE: datainfo.get('TYPE'),
         BRAND: datainfo.get('BRAND'),
         MODEL: datainfo.get('MODEL'),
-        PURCHASE_DATE: datainfo.get('PURCHASE_DATA'),
+        PURCHASE_DATE: datainfo.get('PURCHASE_DAT'),
         DATE_OF_REGISTRATION: datainfo.get('DATE_OF_REGISTRATION')
       });
       

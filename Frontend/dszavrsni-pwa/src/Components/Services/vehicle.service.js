@@ -12,7 +12,7 @@ class vehicleDataService{
       }
 
     async delete(ID){
-        const answer = await http.delete('/Vehicle/' + ID)
+        const answer = await http.delete('/vehicle/' + ID)
         .then(response => {
             return {ok: true, message: 'Succesfully deleted'};
         })
@@ -36,20 +36,6 @@ class vehicleDataService{
      
            return answer;
     }
-
-    async setPhoto(ID,photo){
-    
-      const answer = await http.put('/vehicle/setPhoto/' + ID,photo)
-         .then(response => {
-           return {ok:true, message: 'Succesfully set photo'};
-         })
-         .catch(error => {
-           console.log(error);
-           return {ok:false, message: error.response.data};
-         });
-   
-         return answer;
-       }
 
     async put(ID,vehicle){
         

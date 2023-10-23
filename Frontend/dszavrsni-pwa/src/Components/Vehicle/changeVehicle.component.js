@@ -26,7 +26,7 @@ export default class changeVehicle extends Component {
 
 
   async getVehicle() {
-    // ovo mora bolje
+   
     let href = window.location.href;
     let niz = href.split('/'); 
     await vehicleDataService.getByID(niz[niz.length-1])
@@ -34,7 +34,7 @@ export default class changeVehicle extends Component {
         this.setState({
           vehicle: response.data
         });
-       // console.log(response.data);
+       console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -42,31 +42,24 @@ export default class changeVehicle extends Component {
   }
 
   async changeVehicle(vehicle) {
-    // ovo mora bolje
+
     let href = window.location.href;
     let niz = href.split('/'); 
     const answer = await vehicleDataService.put(niz[niz.length-1],vehicle);
     if(answer.ok){
       window.location.href='/vehicles';
     }else{
-      // pokaži grešku
+      
       console.log(answer);
     }
   }
 
 
   handleSubmit(e) {
-    // Prevent the browser from reloading the page
+
     e.preventDefault();
 
-    // Read the form data
     const datainfo = new FormData(e.target);
-    //Object.keys(formData).forEach(fieldName => {
-    // console.log(fieldName, formData[fieldName]);
-    //})
-    
-    //console.log(podaci.get('verificiran'));
-    // You can pass formData as a service body directly:
 
     this.changeVehicle({
       TYPE: datainfo.get('TYPE'),
@@ -81,36 +74,41 @@ export default class changeVehicle extends Component {
 
   render() {
     
-
+    const { vehicle} = this.state;
     return (
     <Container>
         <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="type">
+        <Form.Group className="mb-3" controlId="TYPE">
                 <Form.Label>TYPE</Form.Label>
-                <Form.Control type="text" name="type" placeholder="karavan" maxLength={50} required/>
+                <Form.Control type="text" name="TYPE" placeholder="karavan" 
+                 maxLength={50} defaultValue={vehicle.TYPE} required/>
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="brand">
+              <Form.Group className="mb-3" controlId="BRAND">
                 <Form.Label>BRAND</Form.Label>
-                <Form.Control type="text" name="brand" placeholder="310B" />
+                <Form.Control type="text" name="BRAND"
+                defaultValue={vehicle.BRAND} placeholder="310B" />
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="model">
+              <Form.Group className="mb-3" controlId="MODEL">
                 <Form.Label>MODEL</Form.Label>
-                <Form.Control type="text" name="model" placeholder="50-1" />
+                <Form.Control type="text" name="MODEL" 
+                defaultValue={vehicle.MODEL} placeholder="50-1" />
               </Form.Group>
     
-              <Form.Group className="mb-3" controlId="purchase date">
+              <Form.Group className="mb-3" controlId="PURCHASE_DATE">
                 <Form.Label>PURCHASE_DATE</Form.Label>
-                <Form.Control type="text" name="purchase date" placeholder="" required />
+                <Form.Control type="text" name="PURCHASE_DATE" placeholder="" 
+                defaultValue={vehicle.PURCHASE_DATE} required />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="date of registration">
+              <Form.Group className="mb-3" controlId="DATE_OF_REGISTRATION">
                 <Form.Label>DATE_OF_REGISTRATION</Form.Label>
-                <Form.Control type="text" name="date_of_registration" placeholder="12.12.2023."required />
+                <Form.Control type="text" name="DATE_OF_REGISTRATION" placeholder="12.12.2023." 
+                defaultValue={vehicle.DATE_OF_REGISTRATION} required />
               </Form.Group>
 
         

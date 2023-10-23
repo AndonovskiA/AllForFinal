@@ -11,7 +11,6 @@ namespace DrivingSchoolWebApi.Data
         {
 
         }
-        
         public DbSet<Instructor> Instructor { get; set; }
 
         public DbSet<Vehicle> Vehicle { get; set; }
