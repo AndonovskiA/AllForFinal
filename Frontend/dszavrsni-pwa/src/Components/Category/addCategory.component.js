@@ -35,9 +35,9 @@ export default class addCategory extends Component {
   
       this.addCategory({
         NAME: datainfo.get('NAME'),
-        PRICE: parseFloat(datainfo.get('PRICE')),
-        NUMBER_OF_TR_LECTURES: parseInt(datainfo.get('NUMBER_OF_TR_LECTURES')),
-        NUMBER_OF_DL: parseInt(datainfo.get('NUMBER_OF_DL'))
+        PRICE: datainfo.get('PRICE'),
+        NUMBER_OF_TR_LECTURES: datainfo.get('NUMBER_OF_TR_LECTURES'),
+        NUMBER_OF_DL: datainfo.get('NUMBER_OF_DL')
       });
       
     }

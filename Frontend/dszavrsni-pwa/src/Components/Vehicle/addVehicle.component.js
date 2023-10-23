@@ -7,14 +7,14 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 
-export default class AddVehicle extends Component {
+export default class addVehicle extends Component {
 
     constructor(props) {
       super(props);
-      this.AddVehicle = this.AddVehicle.bind(this);
+      this.addVehicle = this.addVehicle.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async AddVehicle(course) {
+    async addVehicle(course) {
       const answer = await vehicleDataService.post(course);
       if(answer.ok){
         window.location.href='/course';

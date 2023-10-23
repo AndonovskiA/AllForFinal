@@ -3,12 +3,12 @@ import http from "../../http-common";
 
 class instructorDataService{
 
-    async getAll(){
+    async get(){
         return await http.get('/Instructor');
     }
 
     async getByID(ID) {
-        return await http.get('/instructor/' + ID);
+        return await http.get('/Instructor/' + ID);
       }
 
     async delete(ID){
@@ -28,25 +28,25 @@ class instructorDataService{
         //console.log(instructor);
         const answer = await http.post('/instructor',instructor)
            .then(response => {
-             return {ok:true, message: 'Instructor added'}; // return u odgovor
+             return {ok:true, message: 'Instructor added'}; 
            })
            .catch(error => {
-            //console.log(error.response);
-             return {ok:false, message: error.response.data}; // return u odgovor
+            
+             return {ok:false, message: error.response.data}; 
            });
      
            return answer;
     }
 
     async put(ID,instructor){
-        //console.log(smjer);
-        const answer = await http.put('/instructor/' + ID,instructor)
+       
+        const answer = await http.put('/Instructor/' + ID,instructor)
            .then(response => {
-             return {ok:true, message: 'Instructor changed'}; // return u odgovor
+             return {ok:true, message: 'Instructor changed'}; 
            })
            .catch(error => {
-            //console.log(error.response);
-             return {ok:false, message: error.response.data}; // return u odgovor
+           
+             return {ok:false, message: error.response.data}; 
            });
      
            return answer;

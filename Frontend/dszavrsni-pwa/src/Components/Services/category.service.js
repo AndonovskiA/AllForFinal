@@ -2,7 +2,7 @@ import http from '../../http-common';
 
 
 class categoryDataService{
-  async getAll(){
+  async get(){
     return await http.get('/category');
 }
     

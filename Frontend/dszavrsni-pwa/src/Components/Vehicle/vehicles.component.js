@@ -19,7 +19,7 @@ export default class Vehicless extends Component {
         this.getVehicles();
       }
       async getVehicles() {
-        await vehicleDataService.get() //mozda bez all
+        await vehicleDataService.get() 
           .then(response => {
             this.setState({
               vehicles: response.data

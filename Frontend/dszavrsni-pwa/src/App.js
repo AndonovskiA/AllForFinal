@@ -25,16 +25,16 @@ export default function App() {
         <Route path= '/' element={<MainPage />} />
         <Route path= "/Categories/add" element={<AddCategory />} />
         <Route path= "/Categories" element= {<Categories />} />
-        <Route path= "/Categories/change" element={<ChangeCategory />} /> 
+        <Route path= "/Categories/:ID" element={<ChangeCategory />} /> 
         <Route path= "/Instructors" element={<Instructors />} />
         <Route path= "/Instructors/add" element={<AddInstructor />} />
-        <Route path= "/Instructors/change" element={<ChangeInstructor />} />
+        <Route path= "/Instructors/:ID" element={<ChangeInstructor />} />
         <Route path= '/Students' element={<Students />} />
         <Route path= "/Student/add" element={<AddStudent />} />
-        <Route path= "/Vtudents/:ID" element={<ChangeStudent />} />
+        <Route path= "/Students/:ID" element={<ChangeStudent />} />
         <Route path= "/Vehicles" element={<Vehicles />} />
         <Route path= "/Vehicles/add" element={<AddVehicle />} />
-        <Route path= "/Vehicles/change" element={<ChangeVehicle />} />
+        <Route path= "/Vehicles/:ID" element={<ChangeVehicle />} />
 
       </Routes>
     </Router>

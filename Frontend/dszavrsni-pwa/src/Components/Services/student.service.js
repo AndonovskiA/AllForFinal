@@ -1,22 +1,22 @@
 import http from '../../http-common';
 
 class studentDataService {
-  async getAll() {
-    return await http.get('/student');
+  async get() {
+    return await http.get('/Student');
   }
 
   async getByID(ID) {
-    return await http.get('/student/' + ID);
+    return await http.get('/Student/' + ID);
   }
 
   async post(student){
-    const answer = await http.post('/student',student)
+    const answer = await http.post('/Student',student)
        .then(response => {
-         return {ok:true, message: 'Student added'}; // return u odgovor
+         return {ok:true, message: 'Student added'}; 
        })
        .catch(error => {
         console.log(error.response);
-         return {ok:false, message: error.response.data}; // return u odgovor
+         return {ok:false, message: error.response.data}; 
        });
  
        return answer;
@@ -38,7 +38,7 @@ class studentDataService {
 
   async delete(ID){
     
-    const answer = await http.delete('/student/' + ID)
+    const answer = await http.delete('/Student/' + ID)
        .then(response => {
          return {ok:true, message: 'Succesfully deleted student'};
        })

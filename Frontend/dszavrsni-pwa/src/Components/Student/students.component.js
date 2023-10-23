@@ -28,7 +28,7 @@ export default class Students extends Component {
         this.getStudents();
       }
       getStudents() {
-        studentDataService.getAll()
+        studentDataService.get()
           .then(response => {
             this.setState({
               students: response.data

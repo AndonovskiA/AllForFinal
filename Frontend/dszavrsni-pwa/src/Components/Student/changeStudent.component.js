@@ -29,7 +29,7 @@ export default class changestudent extends Component {
 
 
   async getStudent() {
-    // ovo mora bolje
+   
     let href = window.location.href;
     let niz = href.split('/'); 
     await studentDataService.getBySifra(niz[niz.length-1])
@@ -37,7 +37,7 @@ export default class changestudent extends Component {
         this.setState({
           student: response.data
         });
-       // console.log(response.data);
+      
       })
       .catch(e => {
         console.log(e);
@@ -45,39 +45,34 @@ export default class changestudent extends Component {
   }
 
   async changeStudent(student) {
-    // ovo mora bolje
+    
     let href = window.location.href;
     let niz = href.split('/'); 
     const answer = await studentDataService.put(niz[niz.length-1],student);
     if(answer.ok){
       window.location.href='/students';
     }else{
-      // pokaži grešku
+      
       console.log(answer);
     }
   }
 
 
   handleSubmit(e) {
-    // Prevent the browser from reloading the page
+
     e.preventDefault();
 
-    // Read the form data
+
     const datainfo = new FormData(e.target);
-    //Object.keys(formData).forEach(fieldName => {
-    // console.log(fieldName, formData[fieldName]);
-    //})
-    
-    //console.log(podaci.get('verificiran'));
-    // You can pass formData as a service body directly:
+
 
     this.changeStudent({
-      First_Name: datainfo.get('First name'),
-      Last_Name: datainfo.get('Last name'),
-      Address: datainfo.get('Address'),
+      FIRST_NAME: datainfo.get('FIRST_NAME'),
+      LAST_NAME: datainfo.get('LAST_NAME'),
+      ADDRESS: datainfo.get('ADDRES'),
       OIB: datainfo.get('OIB'),
-      Contact_Number: datainfo.get('Contact number'),
-      Date_of_Enrollment: datainfo.get('Date of enrollment')
+      CONTACT_NUMBER: datainfo.get('CONTACT_NUMBER'),
+      DATE_OF_ENROLLMENT: datainfo.get('DATE_OF_ENROLLMENT')
     });
     
   }
@@ -85,42 +80,48 @@ export default class changestudent extends Component {
 
   render() {
     
-    const {student} = this.state;
+const { student}= this.state;
 
     return (
     <Container>
         <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="First name">
-                <Form.Label>First_Name</Form.Label>
-                <Form.Control type="text" name="first name" placeholder="Anja" maxLength={30} required/>
+        <Form.Group className="mb-3" controlId="FIRST_NAME">
+                <Form.Label>FIRST_NAME</Form.Label>
+                <Form.Control type="text" name="FIRST_NAME" placeholder="Anja" maxLength={30}
+                defaultValue={student.FIRST_NAME} required/>
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="Last name">
-                <Form.Label>Last_Name</Form.Label>
-                <Form.Control type="text" name="last name" placeholder="Petakić" required />
+              <Form.Group className="mb-3" controlId="LAST_NAME">
+                <Form.Label>LAST_NAME</Form.Label>
+                <Form.Control type="text" name="LAST_NAME" placeholder="Petakić" 
+                defaultValue={student.LAST_NAME} required />
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="address">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="text" name="address" placeholder="somewhat street "required />
+              <Form.Group className="mb-3" controlId="ADDRESS">
+                <Form.Label>ADDRESS</Form.Label>
+                <Form.Control type="text" name="ADDRESS" placeholder="somewhat street "
+                defaultValue={student.ADDRESS} required />
               </Form.Group>
     
-              <Form.Group className="mb-3" controlId="oib">
+              <Form.Group className="mb-3" controlId="OIB">
                 <Form.Label>OIB</Form.Label>
-                <Form.Control type="text" name="oib" placeholder="" required />
+                <Form.Control type="text" name="OIB" placeholder="" required
+                 defaultValue={student.OIB} />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="contact number">
-                <Form.Label>Contact_Number</Form.Label>
-                <Form.Control type="text" name="contact number" placeholder="99999999999"required />
+              <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
+                <Form.Label>CONTACT_NUMBER</Form.Label>
+                <Form.Control type="text" name="CONTACT_NUMBER" placeholder="99999999999"required
+                defaultValue={student.CONTACT_NUMBER} />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="date of enrollment">
-                <Form.Label>Date_of_Enrollment</Form.Label>
-                <Form.Control type="text" name="date of enrollment" placeholder="05.08.2023" required/>
+              <Form.Group className="mb-3" controlId="DATE_OF_ENROLLMENT">
+                <Form.Label>DATE_OF_ENROLLMENT</Form.Label>
+                <Form.Control type="text" name="DATE_OF_ENROLLMENT" placeholder="05.08.2023" required
+                defaultValue={student.DATE_OF_ENROLLMENT} />
               </Form.Group>
 
         

@@ -8,11 +8,11 @@ class vehicleDataService{
     }
 
     async getByID(ID) {
-        return await http.get('/vehicle/' + ID);
+        return await http.get('/Vehicle/' + ID);
       }
 
     async delete(ID){
-        const answer = await http.delete('/vehicle/' + ID)
+        const answer = await http.delete('/Vehicle/' + ID)
         .then(response => {
             return {ok: true, message: 'Succesfully deleted'};
         })
@@ -25,7 +25,7 @@ class vehicleDataService{
 
     async post(vehicle){
        
-        const answer = await http.post('/vehicle',vehicle)
+        const answer = await http.post('/Vehicle',vehicle)
            .then(response => {
              return {ok:true, message: 'Vehicle added'}; 
            })
@@ -39,7 +39,7 @@ class vehicleDataService{
 
     async put(ID,vehicle){
         
-        const answer = await http.put('/vehicle/' + ID,vehicle)
+        const answer = await http.put('/Vehicle/' + ID,vehicle)
            .then(response => {
              return {ok:true, message: 'Vehicle changed'}; 
            })

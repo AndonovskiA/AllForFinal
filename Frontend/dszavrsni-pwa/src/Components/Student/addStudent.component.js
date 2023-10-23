@@ -7,21 +7,21 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 
-export default class AddStudent extends Component {
+export default class addStudent extends Component {
 
     constructor(props) {
       super(props);
-      this.AddStudent = this.AddStudent.bind(this);
+      this.addStudent = this.addStudent.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async AddStudent(course) {
-      const odgovor = await studentDataService.post(course);
-      if(odgovor.ok){
+    async addStudent(course) {
+      const answer = await studentDataService.post(course);
+      if(answer.ok){
         // routing na tecaj
         window.location.href='/students';
       }else{
         // pokaži grešku
-        console.log(odgovor);
+        console.log(answer);
       }
     }
   
@@ -32,12 +32,12 @@ export default class AddStudent extends Component {
       const datainfo = new FormData(e.target);
   
       this.addStudent({
-        FIRST_NAME: datainfo.get('First name'),
-        Last_Name: datainfo.get('Last name'),
-        Address: datainfo.get('Address'),
+        FIRST_NAME: datainfo.get('FIRST_NAME'),
+        LAST_NAME: datainfo.get('LAST_NAME'),
+        ADDRESS: datainfo.get('ADDRESS'),
         OIB: datainfo.get('OIB'),
-        Contact_Number: datainfo.get('Contact number'),
-        Date_of_Enrollment: datainfo.get('Date of enrollment')
+        Contact_Number: datainfo.get('CONTACT_NUMBER'),
+        Date_of_Enrollment: datainfo.get('DATE_OF_ENROLLMENT')
       });
       
     }
@@ -48,36 +48,36 @@ export default class AddStudent extends Component {
             <Form onSubmit={this.handleSubmit}>
     
     
-              <Form.Group className="mb-3" controlId="First name">
-                <Form.Label>First_Name</Form.Label>
-                <Form.Control type="text" name="first name" placeholder="Anja" maxLength={255} required/>
+              <Form.Group className="mb-3" controlId="FIRST_NAME">
+                <Form.Label>FIRST_NAME</Form.Label>
+                <Form.Control type="text" name="FIRST_NAME" placeholder="Anja" maxLength={255} required/>
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="Last name">
-                <Form.Label>Last_Name</Form.Label>
-                <Form.Control type="text" name="last name" placeholder="Petakić" required />
+              <Form.Group className="mb-3" controlId="LAST_NAME">
+                <Form.Label>LAST_NAME</Form.Label>
+                <Form.Control type="text" name="LAST_NAME" placeholder="Petakić" required />
               </Form.Group>
     
     
-              <Form.Group className="mb-3" controlId="address">
-                <Form.Label>Address</Form.Label>
-                <Form.Control type="text" name="address" placeholder="somewhat street " />
+              <Form.Group className="mb-3" controlId="ADDRESS">
+                <Form.Label>ADDRESS</Form.Label>
+                <Form.Control type="text" name="ADDRESS" placeholder="somewhat street " />
               </Form.Group>
     
-              <Form.Group className="mb-3" controlId="oib">
+              <Form.Group className="mb-3" controlId="OIB">
                 <Form.Label>OIB</Form.Label>
-                <Form.Control type="text" name="oib" placeholder="" />
+                <Form.Control type="text" name="OIB" placeholder="" />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="contact number">
-                <Form.Label>Contact_Number</Form.Label>
-                <Form.Control type="text" name="cpntact number" placeholder="99999999999" />
+              <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
+                <Form.Label>CONTACT_NUMBER</Form.Label>
+                <Form.Control type="text" name="CONTACT_NUMBER" placeholder="99999999999" />
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="date of enrollment">
-                <Form.Label>Date_of_Enrollment</Form.Label>
-                <Form.Control type="text" name="date of enrollment" placeholder="05.08.2023" />
+              <Form.Group className="mb-3" controlId="DATE_OF_ENROLLMENT">
+                <Form.Label>DATE_OF_ENROLLMENT</Form.Label>
+                <Form.Control type="text" name="DATE_OF_ENROLLMENT" placeholder="05.08.2023" />
               </Form.Group>
 
 

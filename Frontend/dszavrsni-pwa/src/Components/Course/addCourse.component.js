@@ -20,18 +20,19 @@ export default class addCourse extends Component {
     super(props);
     this.addCourse = this.addCourse.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.addStudent = this.getStudents.bind(this);
+    this.getStudents = this.getStudents.bind(this); 
     this.getCategory= this.getCategories.bind(this);
     this.getInstructor= this.getInstructors.bind(this);
     this.getVehicle= this.getVehicle.bind(this);
     this.state = {
-      smjerovi: [],
-      sifraSmjer:0,
-      IDStudents:0,
-      students
+      categories: [], // ili ID
+      instructors:[],
+      vehicles:[],
+      students:[]
     };
   }
-
+ 
+  
 
   async addCourse(course) {
     const answer = await courseDataService.post(course);
@@ -89,6 +90,20 @@ export default class addCourse extends Component {
         console.log(e);
       });
   }
+  async getStudents() {
+
+    await studentDataService.get()
+      .then(response => {
+        this.setState({
+          students: response.data,
+          IDStudent: response.data[0].ID
+        });
+
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
 
   handleSubmit(e) {
@@ -99,7 +114,7 @@ export default class addCourse extends Component {
     let datetime = moment.utc(dataInfo.get('startDate') + ' ' + dataInfo.get('Time'));
     console.log(datetime);
 
-    this.addCourse({
+    this.addCourse({ // jel vamo ide instr, vozilo itd u add
       startDate: datetime,
     });
     
@@ -107,7 +122,7 @@ export default class addCourse extends Component {
 
 
   render() { 
-    const { smjerovi} = this.state;
+    const { courses} = this.state; // ovo ne tako
     return (
     <Container>
         <Form onSubmit={this.handleSubmit}>
@@ -125,6 +140,30 @@ export default class addCourse extends Component {
             </Form.Select>
           </Form.Group>
 
+          <Form.Group className="mb-3" controlId="INSTRUCTOR">
+            <Form.Label>INSTRUCTOR</Form.Label>
+            <Form.Select onChange={e => {
+              this.setState({ IDInstructor: e.target.value});
+            }}>
+            {instructors && instructors.map((instructor,index) => (
+                  <option key={index} value={instructor.ID}>{instructor.NAME}</option>
+
+            ))}
+            </Form.Select>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="CATEGORY">
+            <Form.Label>CATEGORY</Form.Label>
+            <Form.Select onChange={e => {
+              this.setState({ IDCategory: e.target.value});
+            }}>
+            {categories && categories.map((category,index) => ( // sta je ovo
+                  <option key={index} value={vehicle.ID}>{vehicle.BRAND}</option>
+
+            ))}
+            </Form.Select>
+          </Form.Group>
+
 
 
 
@@ -135,10 +174,9 @@ export default class addCourse extends Component {
 
           <Form.Group className="mb-3" controlId="TIME">
             <Form.Label>TIME</Form.Label>
-            <Form.Control type="time" name="TIME" placeholder=""  />
+            <Form.Control type="date" name="TIME" placeholder=""  />
           </Form.Group>
-
-         
+  
 
 
 

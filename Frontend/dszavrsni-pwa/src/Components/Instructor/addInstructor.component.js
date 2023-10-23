@@ -78,7 +78,7 @@ export default class addInstructor extends Component {
                 </Col>
                 <Col>
                 <Button variant="primary" className="gumb" type="submit">
-                  Add instrctor
+                  Add instructor
                 </Button>
                 </Col>
             </Row>
