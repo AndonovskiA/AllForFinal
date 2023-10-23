@@ -192,7 +192,7 @@ namespace DrivingSchoolWebApi.Controllers
         /// <summary>
         /// brisanje polaznika
         /// </summary>
-        /// <param name="ID"></param>
+        /// <param name="condition"></param>
         /// <returns></returns>
         [HttpDelete]
         [HttpGet]
@@ -211,11 +211,8 @@ namespace DrivingSchoolWebApi.Controllers
                 var students = _context.Student
                     .Include(s => s.Courses)
                     .Where(s => s.FIRST_NAME.Contains(condition) || s.LAST_NAME.Contains(condition))
-
-                    // .FromSqlRaw($"SELECT a.* FROM polaznik a left join clan b on a.sifra=b.polaznik where concat(ime,' ',prezime,' ',ime) like '%@uvjet%'",
-                    //             new SqlParameter("uvjet", uvjet), new SqlParameter("grupa", grupa))
                     .ToList();
-                // (b.grupa is null or b.grupa!=@grupa)  and 
+        
                 List<StudentDTO> back = new();
 
                 students.ForEach(s => {

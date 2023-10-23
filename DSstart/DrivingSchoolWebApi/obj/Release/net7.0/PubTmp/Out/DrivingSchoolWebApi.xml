@@ -49,6 +49,7 @@
             <summary>
             dodavanje novih tecajeva
             </summary>
+            <param name="ID"></param>
             <param name="courseDTO"></param>
             <returns></returns>
         </member>
@@ -134,7 +135,7 @@
             <summary>
             brisanje polaznika
             </summary>
-            <param name="ID"></param>
+            <param name="condition"></param>
             <returns></returns>
         </member>
         <member name="M:DrivingSchoolWebApi.Controllers.StudentController.Delete(System.Int32)">

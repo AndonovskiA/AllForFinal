@@ -81,6 +81,7 @@ namespace DrivingSchoolWebApi.Controllers
         /// <summary>
         /// dodavanje novih tecajeva
         /// </summary>
+        /// <param name="ID"></param>
         /// <param name="courseDTO"></param>
         /// <returns></returns>
         [HttpPost]
@@ -384,8 +385,6 @@ namespace DrivingSchoolWebApi.Controllers
                     return BadRequest();
                 }
 
-                // napraviti kontrolu da li je taj polaznik već u toj grupi
-                // napravi doma
                 course.Students.Add(student);
                 _context.Course.Update(course);
                 _context.SaveChanges();

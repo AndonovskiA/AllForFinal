@@ -51,7 +51,7 @@ namespace DrivingSchoolWebApi.Controllers
         /// <param name="ID"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("{sifra:ID}")]
+        [Route("{ID:int}")]
         public IActionResult GetByID(int ID)
         {
 
