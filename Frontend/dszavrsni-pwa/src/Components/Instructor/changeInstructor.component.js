@@ -18,7 +18,7 @@ export default class changeInstructor extends Component {
     this.instructor = this.getInstructor();
     this.changeInstructor = this.changeInstructor.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    
+
     this.state = {
       instructor: {}
     };
@@ -27,10 +27,10 @@ export default class changeInstructor extends Component {
 
 
   async getInstructor() {
- 
+
     let href = window.location.href;
-    let niz = href.split('/'); 
-    await instructorDataService.getByID(niz[niz.length-1])
+    let niz = href.split('/');
+    await instructorDataService.getByID(niz[niz.length - 1])
       .then(response => {
         this.setState({
           instructor: response.data
@@ -45,11 +45,12 @@ export default class changeInstructor extends Component {
   async changeInstructor(instructor) {
     // ovo mora bolje
     let href = window.location.href;
-    let niz = href.split('/'); 
-    const answer = await instructorDataService.put(niz[niz.length-1],instructor);
-    if(answer.ok){
-      window.location.href='/instructors';
-    }else{
+    let niz = href.split('/');
+    debugger
+    const answer = await instructorDataService.put(niz[niz.length - 1], instructor);
+    if (answer.ok) {
+      window.location.href = '/instructors';
+    } else {
       // pokaži grešku
       console.log(answer);
     }
@@ -57,11 +58,13 @@ export default class changeInstructor extends Component {
 
 
   handleSubmit(e) {
-    
+
     e.preventDefault();
 
     const datainfo = new FormData(e.target);
-   
+    const firstName = datainfo.get('FIRST_NAME');
+    debugger
+
     this.changeInstructor({
       FIRST_NAME: datainfo.get('FIRST_NAME'),
       LAST_NAME: datainfo.get('LAST_NAME'),
@@ -69,66 +72,66 @@ export default class changeInstructor extends Component {
       EMAIL: datainfo.get("EMAIL"),
       CONTACT_NUMBER: datainfo.get('CONTACT_NUMBER'),
     });
-    
+
   }
 
 
   render() {
-    
-    const {instructor} = this.state;
+
+    const { instructor } = this.state;
 
     return (
-    <Container>
+      <Container>
         <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="FIRST_NAME">
-                <Form.Label>FIRST_NAME</Form.Label>
-                <Form.Control type="text" name="FIRST_NAME" placeholder="Petak" 
-                defaultValue={instructor.FIRST_NAME} maxLength={30}/>
-              </Form.Group>
-    
-    
-              <Form.Group className="mb-3" controlId="LAST_NAME">
-                <Form.Label>LAST_NAME</Form.Label>
-                <Form.Control type="text" name="LAST_NAME" placeholder="Petakić"
-                 defaultValue={instructor.LAST_NAME} />
-              </Form.Group>
-    
-    
-              <Form.Group className="mb-3" controlId="DRIVER_LICENSE_NUMBER">
-                <Form.Label>DRIVER_LICENSE_NUMBER</Form.Label>
-                <Form.Control type="text" name="DRIVER_LICENSE_NUMBER" placeholder="6546464 "
-                 defaultValue={instructor.DRIVER_LICENSE_NUMBER}/>
-              </Form.Group>
+          <Form.Group className="mb-3" controlId="FIRST_NAME">
+            <Form.Label>FIRST_NAME</Form.Label>
+            <Form.Control type="text" name="FIRST_NAME" placeholder="Petak"
+              defaultValue={instructor.FIRST_NAME} maxLength={30} />
+          </Form.Group>
 
-              <Form.Group className="mb-3" controlId="EMAIL">
-                <Form.Label>EMAIL</Form.Label>
-                <Form.Control type="text" name="EMAIL" placeholder="abcd.pet@gmail.com"
-                defaultValue={instructor.EMAIL} />
-              </Form.Group>
 
-              <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
-                <Form.Label>CONTACT_NUMBER</Form.Label>
-                <Form.Control type="text" name="CONTACT_NUMBER" placeholder="1234567890"
-                defaultValue={instructor.CONTACT_NUMBERs} />
-              </Form.Group>
-        
-         
+          <Form.Group className="mb-3" controlId="LAST_NAME">
+            <Form.Label>LAST_NAME</Form.Label>
+            <Form.Control type="text" name="LAST_NAME" placeholder="Petakić"
+              defaultValue={instructor.LAST_NAME} />
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="DRIVER_LICENSE_NUMBER">
+            <Form.Label>DRIVER_LICENSE_NUMBER</Form.Label>
+            <Form.Control type="text" name="DRIVER_LICENSE_NUMBER" placeholder="6546464 "
+              defaultValue={instructor.DRIVER_LICENSE_NUMBER} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="EMAIL">
+            <Form.Label>EMAIL</Form.Label>
+            <Form.Control type="text" name="EMAIL" placeholder="abcd.pet@gmail.com"
+              defaultValue={instructor.EMAIL} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
+            <Form.Label>CONTACT_NUMBER</Form.Label>
+            <Form.Control type="text" name="CONTACT_NUMBER" placeholder="1234567890"
+              defaultValue={instructor.CONTACT_NUMBERs} />
+          </Form.Group>
+
+
           <Row>
             <Col>
               <Link className="btn btn-danger gumb" to={`/instructors`}>Cancel</Link>
             </Col>
             <Col>
-            <Button variant="primary" className="gumb" type="submit">
-              Change instructor
-            </Button>
+              <Button variant="primary" className="gumb" type="submit">
+                Change instructor
+              </Button>
             </Col>
           </Row>
         </Form>
 
 
-      
-    </Container>
+
+      </Container>
     );
   }
 }

@@ -31,8 +31,9 @@ export default class Courses extends Component {
   componentDidMount() {
     this.getCourses();
   }
+
   async getCourses() {
-    courseDataService.get()
+    courseDataService.getAll()
       .then(response => {
         this.setState({
           courses: response.data
@@ -44,83 +45,82 @@ export default class Courses extends Component {
       });
   }
 
-  async deleteCourse(ID){
-    
+  async deleteCourse(ID) {
+
     const answer = await courseDataService.delete(ID);
-    if(answer.ok){
-     this.getCourses();
-    }else{
-     this.openModal();
+    if (answer.ok) {
+      this.getCourses();
+    } else {
+      this.openModal();
     }
-    
-   }
+
+  }
 
   render() {
-    const {courses} = this.state;
+    const { courses } = this.state;
     return (
 
-      
-//nezz jel idu i kljucevi vamo ili ne
+
+      //nezz jel idu i kljucevi vamo ili ne
 
 
-    <Container>
-      <a href="/courses/add" className="btn btn-success gumb">  ADD NEW COURSE  </a>
-      <Table striped bordered hover responsive>
-              <thead>
-                <tr>
-                  <th>startDate</th>
-                  <th>Number_of_students</th> 
-                  
-                  <th>Action</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-              {courses && courses.map((c,index) => (
-                
-                <tr key={index}>
-                  <td> 
-                    <p className="course">{c.NAME} ({c.startDate})</p>
-                    {c.IDVehicle} {c.ID.Instructor} {c.IDCategory}
-                  </td>
-                  <td className="course">
-                    {c.startDate==null ? "Start date and time are not defined" :
+      <Container>
+        <a href="/courses/add" className="btn btn-success gumb">  ADD NEW COURSE  </a>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>Start date</th>
+              <th>Number of students</th>
+              <th>Action</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {courses && courses.map((c, index) => (
+
+              <tr key={index}>
+                <td>
+                  <p className="course">{c.name} ({c.startDate})</p>
+                  {c.idVehicle} {c.idInstructor} {c.idCategory}
+                </td>
+                <td className="course">
+                  {c.startDate == null ? "Start date and time are not defined" :
                     moment.utc(c.startDate).format("DD. MM. YYYY. HH:mm")}
-                  </td>
-                  <td>
-                    <Row>
-                      <Col>
-                        <Link className="btn btn-primary gumb" to={`/courses/${c.ID}`}><FaEdit /></Link>
-                      </Col>
-                      <Col>
-                        { 
-                             <Button variant="danger"  className="gumb" onClick={() => this.deleteCourse(c.ID)}><FaTrash /></Button>
-                        }
-                      </Col>
-                    </Row>
-                    
-                  </td>
-                </tr>
-                ))
-              }
-              </tbody>
-            </Table>     
+                </td>
+                <td>
+                  <Row>
+                    <Col>
+                      <Link className="btn btn-primary gumb" to={`/courses/${c.id}`}><FaEdit /></Link>
+                    </Col>
+                    <Col>
+                      {
+                        <Button variant="danger" className="gumb" onClick={() => this.deleteCourse(c.id)}><FaTrash /></Button>
+                      }
+                    </Col>
+                  </Row>
 
-             <Modal show={this.state.showModal} onHide={this.closeModal}>
-              <Modal.Header closeButton>
-                <Modal.Title>Error has occured while deleting</Modal.Title>
-              </Modal.Header>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={this.closeModal}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
+                </td>
+              </tr>
+            ))
+            }
+          </tbody>
+        </Table>
 
-    </Container>
+        <Modal show={this.state.showModal} onHide={this.closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Error has occured while deleting</Modal.Title>
+          </Modal.Header>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.closeModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+      </Container>
 
 
     );
-    
-        }
+
+  }
 }
