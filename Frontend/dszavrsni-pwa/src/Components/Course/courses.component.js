@@ -31,7 +31,7 @@ export default class Grupe extends Component {
     this.getCourses();
   }
   getCourses() {
-    courseDataService.getAll()
+    courseDataService.get()
       .then(response => {
         this.setState({
           courses: response.data
@@ -72,12 +72,12 @@ export default class Grupe extends Component {
                 
                 <tr key={index}>
                   <td> 
-                    <p className="naslovSmjer">{category.NAME} ({g.brojPolaznika})</p>
+                    <p className="naslovSmjer">{c.NAME} ({c.startDate})</p>
                     {g.smjer}
                   </td>
                   <td className="naslovSmjer">
                     {c.startDate==null ? "Start date and time are not defined" :
-                    moment.utc(g.datumPocetka).format("DD. MM. YYYY. HH:mm")}
+                    moment.utc(c.startDate).format("DD. MM. YYYY. HH:mm")}
                   </td>
                   <td>
                     <Row>

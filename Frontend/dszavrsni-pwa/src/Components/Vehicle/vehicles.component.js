@@ -6,19 +6,21 @@ import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 
 
-export default class Vehicless extends Component {
+export default class Vehicles extends Component {
     constructor(props) {
       super(props);
   
       this.state = {
-        vehicles: [],
+        vehicles: []
       };
     }
     
     componentDidMount() {
         this.getVehicles();
       }
-      async getVehicles() {
+    
+    
+     async getVehicles() {
         await vehicleDataService.get() 
           .then(response => {
             this.setState({
@@ -39,7 +41,8 @@ export default class Vehicless extends Component {
           alert(answer.message);
         }
         
-       }
+      }
+
 
        render() {
         const {vehicles} = this.state;
@@ -51,18 +54,22 @@ export default class Vehicless extends Component {
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
+                        <th>TYPE</th>
                         <th>BRAND</th>
                         <th>MODEL</th>
                         <th>PURCHASE_DATE</th>
                         <th>DATE_OF_REGISTRATION</th>
-                        <th>Akcija</th>
+                        <th>ACTION</th>
+
                     </tr>
                 </thead>
                 <tbody>
                    { vehicles && vehicles.map((vehicle,index) => (
 
                     <tr key={index}>
+
                         <td>{vehicle.BRAND}</td>
+
                         <td>
                             <Link className="btn btn-primary gumb"
                             to={`/vehicles/${vehicle.ID}`}>
@@ -73,8 +80,11 @@ export default class Vehicless extends Component {
                             onClick={()=>this.deleteVehicle(vehicle.ID)}>
                                 <FaTrash />
                             </Button>
+
                         </td>
+
                     </tr>
+
 
                    ))}
                 </tbody>

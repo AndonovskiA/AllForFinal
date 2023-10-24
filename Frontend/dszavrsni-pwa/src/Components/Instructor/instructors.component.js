@@ -9,6 +9,7 @@ import { FaTrash } from 'react-icons/fa';
 
 
 export default class Instructors extends Component {
+
   constructor(props) {
     super(props);
     this.getInstructors = this.getInstructors.bind(this);
@@ -34,7 +35,7 @@ export default class Instructors extends Component {
         });
     }
 
-    async deleteCategory(ID){
+    async deleteInstructor(ID){
   
       const answer = await instructorDataService.delete(ID);
       if(answer.ok){
@@ -51,7 +52,10 @@ export default class Instructors extends Component {
       return (
   
       <Container>
-        <a href="/instructors/add" className="btn btn-success gumb">ADD NEW INSTRUCTOR</a>
+        <a href="/instructors/add" className="btn btn-success gumb">
+          ADD NEW INSTRUCTOR
+          </a>
+
         <Table striped bordered hover responsive>
                 <thead>
                     <tr>
@@ -68,8 +72,20 @@ export default class Instructors extends Component {
 
                     <tr key={index}>
                         <td>{instructor.FIRST_NAME}</td>
-                        
+
+                        <td>{instructor.LAST_NAME}</td>
+
+                        <td>{instructor.DRIVER_LICENSE_NUMBER}</td>
+
+                        <td>{instructor.EMAIL}</td>
+
+                        <td>{instructor.CONTACT_NUMBER}</td>
+
                         <td>
+                        
+                        
+
+                        
                             <Link className="btn btn-primary gumb"
                             to={`/instructors/${instructor.ID}`}>
                                 <FaEdit />

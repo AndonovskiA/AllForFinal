@@ -26,7 +26,7 @@ class instructorDataService{
 
     async post(instructor){
         //console.log(instructor);
-        const answer = await http.post('/instructor',instructor)
+        const answer = await http.post('/Instructor',instructor)
            .then(response => {
              return {ok:true, message: 'Instructor added'}; 
            })

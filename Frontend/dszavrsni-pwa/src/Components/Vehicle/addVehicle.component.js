@@ -14,14 +14,14 @@ export default class addVehicle extends Component {
       this.addVehicle = this.addVehicle.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async addVehicle(course) {
-      const answer = await vehicleDataService.post(course);
+    async addVehicle(vehicles) {
+      const answer = await vehicleDataService.post(vehicles);
       if(answer.ok){
-        window.location.href='/course';
+        window.location.href='/vehicles';
       }else{
         console.log(answer);
       }
-    }
+    } // mislim da fali ruta za dodavanje u corse
   
   
   

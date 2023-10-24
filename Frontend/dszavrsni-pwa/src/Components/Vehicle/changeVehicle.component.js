@@ -15,7 +15,7 @@ export default class changeVehicle extends Component {
   constructor(props) {
     super(props);
 
-    this.vehicle = this.getVehicle();
+    this.vehicles = this.getVehicles();
     this.changeVehicle = this.changeVehicle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -25,7 +25,7 @@ export default class changeVehicle extends Component {
   }
 
 
-  async getVehicle() {
+  async getVehicles() {
    
     let href = window.location.href;
     let niz = href.split('/'); 
@@ -65,7 +65,7 @@ export default class changeVehicle extends Component {
       TYPE: datainfo.get('TYPE'),
       BRAND: datainfo.get('BRAND'),
       MODEL: datainfo.get('MODEL'),
-      PURCHASE_DATE: datainfo.get('PURCHASE_DATA'),
+      PURCHASE_DATE: datainfo.get('PURCHASE_DATE'),
       DATE_OF_REGISTRATION: datainfo.get('DATE_OF_REGISTRATION')
     });
     

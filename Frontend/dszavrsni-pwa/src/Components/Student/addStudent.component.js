@@ -14,8 +14,8 @@ export default class addStudent extends Component {
       this.addStudent = this.addStudent.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async addStudent(course) {
-      const answer = await studentDataService.post(course);
+    async addStudent(students) {
+      const answer = await studentDataService.post(students);
       if(answer.ok){
         // routing na tecaj
         window.location.href='/students';

@@ -10,9 +10,11 @@ import { FaEdit } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 import { Modal } from 'react-bootstrap';
 
+
 export default class Students extends Component {
     constructor(props) {
       super(props);
+      
       this.addStudent = this.getStudents.bind(this);
   
       this.state = {
@@ -20,6 +22,8 @@ export default class Students extends Component {
         showModal: false
       };
     }
+
+   
 
     openModal = () => this.setState({ showModal: true });
     closeModal = () => this.setState({ showModal: false });
@@ -59,7 +63,7 @@ export default class Students extends Component {
         <Row>
           { students && students.map((s) => (
                
-               <Col key={s.ID} sm={12} lg={3} md={3}>
+               <Col key={s.ID} sm={10} lg={3} md={3}>
     
                   <Card style={{ width: '18rem' }}>
                     <Card.Body>

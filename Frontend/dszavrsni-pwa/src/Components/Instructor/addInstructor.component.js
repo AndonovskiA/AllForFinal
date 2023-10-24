@@ -11,16 +11,16 @@ export default class addInstructor extends Component {
 
     constructor(props) {
       super(props);
-      this.addInstructor = this.AddInstructor.bind(this);
+      this.addInstructor = this.addInstructor.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-    async AddInstructor(course) {
-      const answer = await instructorDataService.post(course);
+    async addInstructor(instructor) {
+      const answer = await instructorDataService.post(instructor);
       if(answer.ok){
         
         window.location.href='/instructors';
       }else{
-        // pokaži grešku
+        
         console.log(answer);
       }
     }
@@ -31,11 +31,11 @@ export default class addInstructor extends Component {
       e.preventDefault();
       const datainfo = new FormData(e.target);
   
-      this.AddInstructor({
+      this.addInstructor({
       FIRST_NAME: datainfo.get('FIRST_NAME'),
       LAST_NAME: datainfo.get('LAST_NAME'),
       DRIVER_LICENSE_NUMBER: datainfo.get('DRIVER_LICENSE_NUMBER'),
-      EMAIL:datainfo.get("EMAIL"),
+      EMAIL: datainfo.get("EMAIL"),
       CONTACT_NUMBER: datainfo.get('CONTACT_NUMBER'),
       });
       
@@ -46,9 +46,9 @@ export default class addInstructor extends Component {
         <Container>
             <Form onSubmit={this.handleSubmit}>
     
-            <Form.Group className="mb-3" controlId="FIRST_NAME">
+            <Form.Group className="mb-3" controlId="first name">
                 <Form.Label>FIRST_NAME</Form.Label>
-                <Form.Control type="text" name="FIRST_NAME" placeholder="Petak" maxLength={30}/>
+                <Form.Control type="text" name="first name" placeholder="Petak" maxLength={30}/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="LAST_NAME">

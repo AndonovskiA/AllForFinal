@@ -3,6 +3,7 @@ import vehicleDataService from "../../services/vehicle.service";
 import studentDataService from "../../services/Student.service";
 import instructorDataService from "../../services/Instructor.service";
 import categoryDataService from "../../services/Category.service";
+import courseDataService from "../../services/Course.service";
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -22,7 +23,7 @@ export default class ChangeCourse extends Component {
   constructor(props) {
     super(props);
 
-  //  console.log('Konstruktor PromjeniGrupa');
+  
 
     this.course = this.getcourse();
     this.changeCourse = this.changeCourse.bind(this);

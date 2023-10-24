@@ -32,7 +32,7 @@ export default class changestudent extends Component {
    
     let href = window.location.href;
     let niz = href.split('/'); 
-    await studentDataService.getBySifra(niz[niz.length-1])
+    await studentDataService.getByID(niz[niz.length-1])
       .then(response => {
         this.setState({
           student: response.data
@@ -67,6 +67,7 @@ export default class changestudent extends Component {
 
 
     this.changeStudent({
+     
       FIRST_NAME: datainfo.get('FIRST_NAME'),
       LAST_NAME: datainfo.get('LAST_NAME'),
       ADDRESS: datainfo.get('ADDRES'),

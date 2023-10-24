@@ -20,10 +20,15 @@ export default class MainMenu extends Component{
                 <Nav className="Tu isto nesto">
                   <NavDropdown title="Select" id="basic-nav-dropdown">
                     <NavDropdown.Item href="/vehicles">Vehicles</NavDropdown.Item>
+
                     <NavDropdown.Item href="/students">Students</NavDropdown.Item>
+
                     <NavDropdown.Item href="/instructors">Instructors</NavDropdown.Item>
+
                     <NavDropdown.Item href="/categories">Categories</NavDropdown.Item>
-                    <NavDropdown.Item href="/course">Courses</NavDropdown.Item>
+
+                    <NavDropdown.Item href="/courses">Courses</NavDropdown.Item>
+                    
                     <NavDropdown.Divider />
                     <NavDropdown.Item target="_blank" href="/swagger/index.html">
                       Swagger

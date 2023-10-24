@@ -28,6 +28,8 @@ export default class Categories extends Component {
           this.setState({
             categories: response.data
           });
+          console.log(response.data);
+          
         })
         .catch(e => {
           console.log(e);
@@ -38,7 +40,7 @@ export default class Categories extends Component {
   
       const answer = await categoryDataService.delete(ID);
       if(answer.ok){
-       this.getCategory();
+       this.getCategories();
       }else{
       
         alert(answer.message);
@@ -51,14 +53,17 @@ export default class Categories extends Component {
       return (
   
       <Container>
-        <a href="/categories/add" className="btn btn-success gumb">ADD NEW CATEGORY</a>
+        <a href="/categories/add" className="btn btn-success gumb">
+          ADD NEW CATEGORY
+          </a>
+
         <Table striped bordered hover responsive>
                 <thead>
                     <tr>
                         <th>NAME</th>
                         <th>PRICE</th>
                         <th>NUMBER_OF_TR_LECTURES</th>
-                        <th>NUMBER_OF_DL</th>
+                        <th>NUMBER_OF_DRIVING_LECTURES</th>
                         <th>Action</th>
                     </tr>
                 </thead>

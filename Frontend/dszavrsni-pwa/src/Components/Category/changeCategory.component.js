@@ -62,9 +62,9 @@ export default class changeCategory extends Component {
 
     this.changeCategory({
       NAME: datainfo.get('NAME'),
-      PRICE: datainfo.get('PRICE'),
-      NUMBER_OF_TR_LECTURES: datainfo.get('NUMBER_OF_TR_LECTURES'),
-      NUMBER_OF_DL: datainfo.get('NUMBER_OF_DL')
+      PRICE: parseFloat(datainfo.get('PRICE')),
+      NUMBER_OF_TR_LECTURES: parseInt(datainfo.get('NUMBER_OF_TR_LECTURES')),
+      NUMBER_OF_DRIVING_LECTURES: parseInt(datainfo.get('NUMBER_OF_DRIVING_LECTURES'))
     });
     
   }
@@ -98,10 +98,10 @@ export default class changeCategory extends Component {
                 defaultValue={category.NUMBER_OF_TR_LECTURES} required />
               </Form.Group>
     
-              <Form.Group className="mb-3" controlId="NUMBER_OF_DL">
+              <Form.Group className="mb-3" controlId="NUMBER_OF_DRIVING_LECTURES">
                 <Form.Label>NUMBER_OF_DL</Form.Label>
-                <Form.Control type="text" name="NUMBER_OF_DL" placeholder="50" 
-                defaultValue={category.NUMBER_OF_DL} required />
+                <Form.Control type="text" name="NUMBER_OF_DRIVING_LECTURES" placeholder="50" 
+                defaultValue={category.NUMBER_OF_DRIVING_LECTURES} required />
               </Form.Group>
 
 

@@ -19,17 +19,15 @@ export default class changeInstructor extends Component {
     this.changeInstructor = this.changeInstructor.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     
-    
-
-
     this.state = {
       instructor: {}
     };
   }
 
 
+
   async getInstructor() {
-    // ovo mora bolje
+ 
     let href = window.location.href;
     let niz = href.split('/'); 
     await instructorDataService.getByID(niz[niz.length-1])
@@ -37,18 +35,18 @@ export default class changeInstructor extends Component {
         this.setState({
           instructor: response.data
         });
-       // console.log(response.data);
+        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
       });
   }
 
-  async changeInstructor(student) {
+  async changeInstructor(instructor) {
     // ovo mora bolje
     let href = window.location.href;
     let niz = href.split('/'); 
-    const answer = await instructorDataService.put(niz[niz.length-1],student);
+    const answer = await instructorDataService.put(niz[niz.length-1],instructor);
     if(answer.ok){
       window.location.href='/instructors';
     }else{
@@ -68,7 +66,7 @@ export default class changeInstructor extends Component {
       FIRST_NAME: datainfo.get('FIRST_NAME'),
       LAST_NAME: datainfo.get('LAST_NAME'),
       DRIVER_LICENSE_NUMBER: datainfo.get('DRIVER_LICENSE_NUMBER'),
-      EMAIL:datainfo.get("EMAIL"),
+      EMAIL: datainfo.get("EMAIL"),
       CONTACT_NUMBER: datainfo.get('CONTACT_NUMBER'),
     });
     
