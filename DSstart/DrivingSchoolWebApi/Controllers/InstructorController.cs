@@ -181,7 +181,7 @@ namespace DrivingSchoolWebApi.Controllers
                 return new JsonResult("{\"poruka\":\"Deleted\"}");
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 return new JsonResult("{\"poruka\":\"Can not be deleted\"}");

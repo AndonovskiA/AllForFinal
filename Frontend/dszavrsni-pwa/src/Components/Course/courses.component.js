@@ -12,7 +12,7 @@ import moment from 'moment';
 import { Modal } from 'react-bootstrap';
 
 
-export default class Grupe extends Component {
+export default class Courses extends Component {
   constructor(props) {
     super(props);
     this.getCourses = this.getCourses.bind(this);
@@ -30,7 +30,7 @@ export default class Grupe extends Component {
   componentDidMount() {
     this.getCourses();
   }
-  getCourses() {
+  async getCourses() {
     courseDataService.get()
       .then(response => {
         this.setState({
@@ -64,7 +64,9 @@ export default class Grupe extends Component {
               <thead>
                 <tr>
                   <th>startDate</th>
+                  <th>Number_of_students</th>
                   <th>Action</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -72,10 +74,10 @@ export default class Grupe extends Component {
                 
                 <tr key={index}>
                   <td> 
-                    <p className="naslovSmjer">{c.NAME} ({c.startDate})</p>
-                    {g.smjer}
+                    <p className="course">{c.NAME} ({c.startDate})</p>
+                    {c.IDVehicle} {c.ID.Instructor} {c.IDCategory}
                   </td>
-                  <td className="naslovSmjer">
+                  <td className="course">
                     {c.startDate==null ? "Start date and time are not defined" :
                     moment.utc(c.startDate).format("DD. MM. YYYY. HH:mm")}
                   </td>

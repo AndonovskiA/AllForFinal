@@ -9,7 +9,8 @@ import { FaTrash } from 'react-icons/fa';
 export default class Vehicles extends Component {
     constructor(props) {
       super(props);
-  
+      this.getVehicles= this.getVehicles.bind(this);
+      
       this.state = {
         vehicles: []
       };

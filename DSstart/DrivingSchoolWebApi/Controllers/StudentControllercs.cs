@@ -16,6 +16,7 @@ namespace DrivingSchoolWebApi.Controllers
         public class StudentController : ControllerBase
         {
             private readonly Context _context;
+
         private readonly ILogger<StudentController> _logger;
             public StudentController(Context context, ILogger<StudentController> logger) 
             {
@@ -45,7 +46,10 @@ namespace DrivingSchoolWebApi.Controllers
 
                 students.ForEach(s =>
                 {
-                    var sDto = new StudentDTO()
+                    var sDto = new StudentDTO();
+
+
+                    back.Add(new StudentDTO
                     {
                         ID= s.ID,
                         FIRST_NAME= s.FIRST_NAME,
@@ -54,12 +58,12 @@ namespace DrivingSchoolWebApi.Controllers
                         CONTACT_NUMBER=s.CONTACT_NUMBER,
                         DATE_OF_ENROLLMENT=s.DATE_OF_ENROLLMENT,
 
-                    };
-                       back.Add(sDto);
+                    });
+                       
 
                 });
 
-                return Ok(back);
+                return new JsonResult(back);
 
             }
         /// <summary>
@@ -77,21 +81,31 @@ namespace DrivingSchoolWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
-            {
-                var s = _context.Student.Find(ID);
+            
+            
+           var s = _context.Student.Find(ID);
 
-                if (s == null)
+           if (s == null)
+             {
+               return StatusCode(StatusCodes.Status204NoContent, s);
+             }
+            try 
+            {
+                var DTO = new StudentDTO()
+
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, s);
-                }
-
-                return new JsonResult(s);
-
-            }
-            catch (Exception ex)
+                    ID = s.ID,
+                    FIRST_NAME = s.FIRST_NAME,
+                    LAST_NAME = s.LAST_NAME,
+                    ADDRESS = s.ADDRESS,
+                    CONTACT_NUMBER = s.CONTACT_NUMBER,
+                    DATE_OF_ENROLLMENT = s.DATE_OF_ENROLLMENT,
+                };
+                return new JsonResult(DTO);
+            }     
+            catch (Exception e)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable, ex.Message);
+                return StatusCode(StatusCodes.Status503ServiceUnavailable, e.Message);
             }
 
         }
@@ -128,12 +142,12 @@ namespace DrivingSchoolWebApi.Controllers
                         DATE_OF_ENROLLMENT = dto.DATE_OF_ENROLLMENT,
                     };
 
-                _logger.LogInformation("Stigao", s.DATE_OF_ENROLLMENT);
+                //_logger.LogInformation("Stigao", s.DATE_OF_ENROLLMENT);
 
                 _context.Student.Add(s);
-                _logger.LogInformation("Stigao", s.OIB);
+                //_logger.LogInformation("Stigao", s.OIB);
                 _context.SaveChanges();
-                _logger.LogInformation("Stigao", s.ID);
+                //_logger.LogInformation("Stigao", s.ID);
                 dto.ID = s.ID;
                     return Ok(dto);
 
@@ -194,7 +208,6 @@ namespace DrivingSchoolWebApi.Controllers
         /// </summary>
         /// <param name="condition"></param>
         /// <returns></returns>
-        [HttpDelete]
         [HttpGet]
         [Route("search/{condition}")]
         public IActionResult SearchStudent(string condition)
@@ -209,8 +222,8 @@ namespace DrivingSchoolWebApi.Controllers
             try
             {
                 var students = _context.Student
-                    .Include(s => s.Courses)
-                    .Where(s => s.FIRST_NAME.Contains(condition) || s.LAST_NAME.Contains(condition))
+                    .Include(st => st.Courses)
+                    .Where(st => st.FIRST_NAME.Contains(condition) || st.LAST_NAME.Contains(condition))
                     .ToList();
         
                 List<StudentDTO> back = new();
@@ -271,7 +284,7 @@ namespace DrivingSchoolWebApi.Controllers
                 return new JsonResult("{\"message\":\"Deleted\"}");
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 return new JsonResult("{\"message\":\"Can not be deleted\"}");

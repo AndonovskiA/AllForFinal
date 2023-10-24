@@ -29,7 +29,7 @@ export default class Categories extends Component {
             categories: response.data
           });
           console.log(response.data);
-          
+          // u inspectu dohvaty array al ne prikazuje
         })
         .catch(e => {
           console.log(e);
@@ -65,6 +65,8 @@ export default class Categories extends Component {
                         <th>NUMBER_OF_TR_LECTURES</th>
                         <th>NUMBER_OF_DRIVING_LECTURES</th>
                         <th>Action</th>
+
+
                     </tr>
                 </thead>
                 <tbody>
