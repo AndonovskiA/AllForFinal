@@ -47,7 +47,9 @@ export default class addStudent extends Component {
         <Container>
             <Form onSubmit={this.handleSubmit}>
     
-    
+            
+
+            
               <Form.Group className="mb-3" controlId="FIRST_NAME">
                 <Form.Label>FIRST_NAME</Form.Label>
                 <Form.Control type="text" name="FIRST_NAME" placeholder="Anja" maxLength={255} required/>

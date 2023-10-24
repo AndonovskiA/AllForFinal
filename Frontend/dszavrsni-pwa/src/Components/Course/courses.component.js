@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import courseDataService from "../../services/Course.service";
+import courseDataService from "../Services/course.service";
+import studentDataService from "../Services/student.service";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -58,13 +59,18 @@ export default class Courses extends Component {
     const {courses} = this.state;
     return (
 
+      
+//nezz jel idu i kljucevi vamo ili ne
+
+
     <Container>
       <a href="/courses/add" className="btn btn-success gumb">  ADD NEW COURSE  </a>
       <Table striped bordered hover responsive>
               <thead>
                 <tr>
                   <th>startDate</th>
-                  <th>Number_of_students</th>
+                  <th>Number_of_students</th> 
+                  
                   <th>Action</th>
                   <th></th>
                 </tr>

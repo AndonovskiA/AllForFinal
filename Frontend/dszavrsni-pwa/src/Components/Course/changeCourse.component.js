@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import vehicleDataService from "../../services/vehicle.service";
-import studentDataService from "../../services/Student.service";
-import instructorDataService from "../../services/Instructor.service";
-import categoryDataService from "../../services/Category.service";
-import courseDataService from "../../services/Course.service";
+import vehicleDataService from "../Services/vehicle.service";
+import studentDataService from "../Services/student.service";
+import instructorDataService from "../Services/instructor.service";
+import categoryDataService from "../Services/category.service";
+import courseDataService from "../Services/course.service"; 
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -60,12 +60,12 @@ export default class ChangeCourse extends Component {
     let niz = href.split('/'); 
     await courseDataService.getByID(niz[niz.length-1])
       .then(response => {
-        let g = response.data;
-        g.startTime = moment.utc(g.startTime).format("HH:mm");
-        g.startDate = moment.utc(g.startDate).format("yyyy-MM-DD");
+        let c = response.data;
+        c.startTime = moment.utc(c.startTime).format("HH:mm");
+        c.startDate = moment.utc(c.startDate).format("yyyy-MM-DD");
         
         this.setState({
-          course: co
+          course: c
         });
       })
       .catch(e => {
@@ -77,7 +77,7 @@ export default class ChangeCourse extends Component {
 
   async changeCourse(course) {
     const answer = await courseDataService.post(course);
-    if(odgovor.ok){
+    if(answer.ok){
 
       window.location.href='/course';
     }else{
@@ -173,12 +173,12 @@ export default class ChangeCourse extends Component {
     e.preventDefault();
     const datainfo = new FormData(e.target);
     console.log(datainfo.get('startDate'));
-    console.log(podaci.get('Time'));
+    console.log(datainfo.get('Time'));
     let DaTe = moment.utc(datainfo.get('startDate') + ' ' + datainfo.get('Time'));
-    console.log(datum);
+    console.log("neam pojma");
 
     this.changeCourse({
-      datumPocetka: DaTe,
+      startDate: DaTe,
     });
     
   }
@@ -188,6 +188,8 @@ export default class ChangeCourse extends Component {
     const { students} = this.state;
     const { course} = this.state;
     const { instructors} = this.state;
+    const {vehicles}=this.state;
+    const {categories}=this.state;
     const { foundStudents} = this.state;
 
 
@@ -208,18 +210,50 @@ export default class ChangeCourse extends Component {
         <Form onSubmit={this.handleSubmit}>
           <Row>
           <Col key="1" sm={12} lg={6} md={6}>
-              <Form.Group className="mb-3" controlId="naziv">
-                <Form.Label>Naziv</Form.Label>
-                <Form.Control type="text" name="naziv" placeholder="" maxLength={255} defaultValue={grupa.naziv}  required/>
+
+              <Form.Group className="mb-3" controlId="instructor">
+                <Form.Label>Instructor</Form.Label>
+                <Form.Select defaultValue={course.IDInstructor}  onChange={e => {
+                  this.setState({ IDInstructor: e.target.value});
+                }}>
+                {instructors && instructors.map((instructor,index) => (
+                      <option key={index} value={instructor.ID}>{instructor.FIRST_NAME}</option>
+
+                ))}
+                </Form.Select>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="smjer">
-                <Form.Label>Smjer</Form.Label>
-                <Form.Select defaultValue={grupa.sifraSmjer}  onChange={e => {
-                  this.setState({ sifraSmjer: e.target.value});
+              <Form.Group className="mb-3" controlId="category">
+                <Form.Label>Category</Form.Label>
+                <Form.Select defaultValue={course.IDCategory}  onChange={e => {
+                  this.setState({ IDCategory: e.target.value});
                 }}>
-                {smjerovi && smjerovi.map((smjer,index) => (
-                      <option key={index} value={smjer.sifra}>{smjer.naziv}</option>
+                {categories && categories.map((category,index) => (
+                      <option key={index} value={category.ID}>{category.NAME}</option>
+
+                ))}
+                </Form.Select>
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="vehicle">
+                <Form.Label>Vehicle</Form.Label>
+                <Form.Select defaultValue={course.IDVehicle}  onChange={e => {
+                  this.setState({ IDVehicle: e.target.value});
+                }}>
+                {vehicles && vehicles.map((vehicle,index) => (
+                      <option key={index} value={vehicle.ID}>{vehicle.BRAND}</option>
+
+                ))}
+                </Form.Select>
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="student">
+                <Form.Label>Student</Form.Label>
+                <Form.Select defaultValue={course.IDStudent}  onChange={e => {
+                  this.setState({ IDStudent: e.target.value});
+                }}>
+                {instructors && instructors.map((student,index) => (
+                      <option key={index} value={student.ID}/>
 
                 ))}
                 </Form.Select>
@@ -232,7 +266,7 @@ export default class ChangeCourse extends Component {
 
               <Form.Group className="mb-3" controlId="vrijeme">
                 <Form.Label>Vrijeme</Form.Label>
-                <Form.Control type="time" name="vrijeme" placeholder="" defaultValue={grupa.vrijemePocetka}  />
+                <Form.Control type="time" name="vrijeme" placeholder="" defaultValue={course.startTime}  />
               </Form.Group>
 
             

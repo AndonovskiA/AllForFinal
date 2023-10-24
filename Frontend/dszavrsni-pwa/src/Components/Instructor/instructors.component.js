@@ -29,6 +29,7 @@ export default class Instructors extends Component {
           this.setState({
             instructors: response.data
           });
+          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
@@ -58,6 +59,7 @@ export default class Instructors extends Component {
 
         <Table striped bordered hover responsive>
                 <thead>
+
                     <tr>
                         <th>FIRST_NAME</th>
                         <th>LAST_NAME</th>
@@ -66,6 +68,7 @@ export default class Instructors extends Component {
                         <th>CONTACT_NUMBER</th>
                         <th>Action</th>
                     </tr>
+                    
                 </thead>
                 <tbody>
                    { instructors && instructors.map((instructor,index) => (

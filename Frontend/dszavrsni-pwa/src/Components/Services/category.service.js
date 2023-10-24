@@ -3,7 +3,7 @@ import http from '../../http-common';
 
 class categoryDataService{
   async get(){
-    return await http.get('/category');
+    return await http.get('/Category');
 }
     
   async getByID(ID) {
@@ -11,9 +11,9 @@ class categoryDataService{
   }
 
   async delete(ID){
-    const answer = await http.delete('/category/' + ID)
+    const answer = await http.delete('/Category' + ID)
      .then(response => {
-          return {ok: true, message: 'Succesfully deleted category'};
+          return {ok: true, message: 'Succesfully deleted'};
          })
          .catch(e=>{
              return {ok: false, message: e.response.data};
@@ -23,9 +23,9 @@ class categoryDataService{
      }
  
  
-   async post(category){
+   async post(Category){
  
-     const answer = await http.post('/category',category)
+     const answer = await http.post('/category',Category)
          .then(response => {
            return {ok:true, message: 'Category added'}; 
             })

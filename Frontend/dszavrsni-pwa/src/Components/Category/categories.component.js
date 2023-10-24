@@ -29,7 +29,7 @@ export default class Categories extends Component {
             categories: response.data
           });
           console.log(response.data);
-          // u inspectu dohvaty array al ne prikazuje
+          // u inspectu dohvati array al ne prikazuje
         })
         .catch(e => {
           console.log(e);
@@ -74,6 +74,8 @@ export default class Categories extends Component {
 
                     <tr key={index}>
                         <td>{category.NAME}</td>
+                        <td>{category.NUMBER_OF_TR_LECTURES}</td>
+                        <td>{category.NUMBER_OF_DRIVING_LESSONS}</td>
                         <td className="number">{category.PRICE }</td>
                         <td className="number">
                             <NumericFormat

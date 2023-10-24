@@ -19,15 +19,21 @@ export default class MainMenu extends Component{
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="Tu isto nesto">
                   <NavDropdown title="Select" id="basic-nav-dropdown">
+
                     <NavDropdown.Item href="/vehicles">Vehicles</NavDropdown.Item>
 
+
                     <NavDropdown.Item href="/students">Students</NavDropdown.Item>
+                    
 
                     <NavDropdown.Item href="/instructors">Instructors</NavDropdown.Item>
 
+
                     <NavDropdown.Item href="/categories">Categories</NavDropdown.Item>
 
+
                     <NavDropdown.Item href="/courses">Courses</NavDropdown.Item>
+
                     
                     <NavDropdown.Divider />
                     <NavDropdown.Item target="_blank" href="/swagger/index.html">

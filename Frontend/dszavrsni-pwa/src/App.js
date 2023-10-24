@@ -14,6 +14,9 @@ import Students from './Components/Student/students.component';
 import AddVehicle from './Components/Vehicle/addVehicle.component';
 import ChangeVehicle from './Components/Vehicle/changeVehicle.component';
 import Vehicles from './Components/Vehicle/vehicles.component';
+import Courses from './Components/Course/courses.component';
+import ChangeCourse from './Components/Course/changeCourse.component';
+import AddCourse from './Components/Course/addCourse.component';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -35,6 +38,10 @@ export default function App() {
         <Route path= "/Vehicles" element={<Vehicles />} />
         <Route path= "/Vehicles/add" element={<AddVehicle />} />
         <Route path= "/Vehicles/:ID" element={<ChangeVehicle />} />
+        <Route path= '/Courses' element={<Courses/>}/>
+        <Route path= "/Courses/add" element={<AddCourse/>}/>
+        <Route path= "/Courses/:ID" element={<ChangeCourse/>}/>
+
 
       </Routes>
     </Router>

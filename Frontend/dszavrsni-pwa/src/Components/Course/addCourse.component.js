@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import courseDataService from "../../services/Course.service";
-import instructorDataService from "../../services/Instructor.service";
-import vehicleDataService from "../../services/Vehhicle.service";
-import categoryDataService from "../../services/Category.service";
+import courseDataService from "../Services/course.service";
+import instructorDataService from "../Services/instructor.service";
+import vehicleDataService from "../Services/vehicle.service";
+import categoryDataService from "../Services/category.service";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 import moment from 'moment';
-import { List } from "dom";
+
 
 
 

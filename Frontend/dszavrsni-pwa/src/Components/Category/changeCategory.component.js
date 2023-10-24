@@ -15,7 +15,7 @@ export default class changeCategory extends Component {
   constructor(props) {
     super(props);
 
-    this.category = this.getCategory();
+    this.Category = this.getCategories();
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -29,7 +29,7 @@ export default class changeCategory extends Component {
     
     let href = window.location.href;
     let niz = href.split('/'); 
-    await categoryDataService.getByID(niz[niz.length-1])
+    await categoryDataService(niz[niz.length-1])
       .then(response => {
         this.setState({
           category: response.data

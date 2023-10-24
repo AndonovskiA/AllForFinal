@@ -12,16 +12,14 @@ export default class Vehicles extends Component {
       this.getVehicles= this.getVehicles.bind(this);
       
       this.state = {
-        vehicles: []
+        vehicles: [],
       };
     }
     
     componentDidMount() {
         this.getVehicles();
       }
-    
-    
-     async getVehicles() {
+     async getVehicles(){
         await vehicleDataService.get() 
           .then(response => {
             this.setState({
@@ -51,7 +49,9 @@ export default class Vehicles extends Component {
     
         <Container>
           <a href="/vehicles/add" className="btn btn-success gumb">
-            Add new vehicle</a>
+            Add new vehicle
+            </a>
+
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
@@ -65,11 +65,14 @@ export default class Vehicles extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                   { vehicles && vehicles.map((vehicle,index) => (
+                   { vehicles && vehicles.map((vehicle,ID)=> (
 
-                    <tr key={index}>
-
+                    <tr key={ID}>
+                         
+                        <td>{vehicle.TYPE}</td>
                         <td>{vehicle.BRAND}</td>
+                        <td>{vehicle.PURCHASE_DATE}</td>
+                        <td>{vehicle.DATE_OF_REGISTRATION}</td>
 
                         <td>
                             <Link className="btn btn-primary gumb"
