@@ -15,7 +15,7 @@ export default class changeCategory extends Component {
   constructor(props) {
     super(props);
 
-    this.Category = this.getCategories();
+    this.category = this.getCategory();
     this.changeCategory = this.changeCategory.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -26,15 +26,14 @@ export default class changeCategory extends Component {
 
 
   async getCategory() {
-    
     let href = window.location.href;
-    let niz = href.split('/'); 
-    await categoryDataService(niz[niz.length-1])
+    let niz = href.split('/');
+    await categoryDataService.getByID(niz[niz.length - 1])
       .then(response => {
         this.setState({
           category: response.data
         });
-      
+
       })
       .catch(e => {
         console.log(e);
@@ -42,14 +41,14 @@ export default class changeCategory extends Component {
   }
 
   async changeCategory(category) {
-    
+
     let href = window.location.href;
-    let niz = href.split('/'); 
-    const answer = await categoryDataService.put(niz[niz.length-1],category);
-    if(answer.ok){
-      window.location.href='/categories';
-    }else{
-      
+    let niz = href.split('/');
+    const answer = await categoryDataService.put(niz[niz.length - 1], category);
+    if (answer.ok) {
+      window.location.href = '/categories';
+    } else {
+
       console.log(answer);
     }
   }
@@ -61,67 +60,68 @@ export default class changeCategory extends Component {
     const datainfo = new FormData(e.target);
 
     this.changeCategory({
-      NAME: datainfo.get('NAME'),
-      PRICE: parseFloat(datainfo.get('PRICE')),
-      NUMBER_OF_TR_LECTURES: parseInt(datainfo.get('NUMBER_OF_TR_LECTURES')),
-      NUMBER_OF_DRIVING_LECTURES: parseInt(datainfo.get('NUMBER_OF_DRIVING_LECTURES'))
+      name: datainfo.get('name'),
+      price: datainfo.get('price'),
+      numbeR_OF_TR_LECTURES: datainfo.get('numbeR_OF_TR_LECTURES'),
+      numbeR_OF_DRIVING_LECTURES: datainfo.get('numbeR_OF_DRIVING_LECTURES')
     });
-    
+
   }
 
 
   render() {
-    
-    const { category}= this.state;
+
+    const { category } = this.state;
 
     return (
-    <Container>
+      <Container>
         <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="NAME">
-                <Form.Label>NAME</Form.Label>
-                <Form.Control type="text" name="NAME" placeholder="category name" maxLength={255}
-                 defaultValue={category.NAME}  required/>
-              </Form.Group>
-    
-    
-              <Form.Group className="mb-3" controlId="PRICE">
-                <Form.Label>PRICE</Form.Label>
-                <Form.Control type="decimal" name="PRICE" placeholder="350.50"
-               defaultValue={category.PRICE} required />
-              </Form.Group>
-
-    
-              <Form.Group className="mb-3" controlId="NUMBER_OF_TR_LECTURES">
-                <Form.Label>NUMBER_OF_TR_LECTURES</Form.Label>
-                <Form.Control type="text" name="NUMBER_OF_TR_LECTURES" placeholder="50" 
-                defaultValue={category.NUMBER_OF_TR_LECTURES} required />
-              </Form.Group>
-    
-              <Form.Group className="mb-3" controlId="NUMBER_OF_DRIVING_LECTURES">
-                <Form.Label>NUMBER_OF_DL</Form.Label>
-                <Form.Control type="text" name="NUMBER_OF_DRIVING_LECTURES" placeholder="50" 
-                defaultValue={category.NUMBER_OF_DRIVING_LECTURES} required />
-              </Form.Group>
+          <Form.Group className="mb-3" controlId="name">
+            <Form.Label>NAME</Form.Label>
+            <Form.Control type="text" name="nsme" placeholder="category name" maxLength={255}
+              defaultValue={category.name} required />
+          </Form.Group>
 
 
-        
-         
+          <Form.Group className="mb-3" controlId="price">
+            <Form.Label>PRICE</Form.Label>
+            <Form.Control type="decimal" name="price" placeholder="350.50"
+              defaultValue={category.price} required />
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="numbeR_OF_TR_LECTURES">
+            <Form.Label>NUMBER_OF_TR_LECTURES</Form.Label>
+
+            <Form.Control type="text" name="numbeR_OF_TR_LECTURES" placeholder="50"
+              defaultValue={category.numbeR_OF_TR_LECTURES} required />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="numbeR_OF_DRIVING_LECTURES">
+            <Form.Label>NUMBER_OF_DL</Form.Label>
+            <Form.Control type="text" name="numbeR_OF_DRIVING_LECTURES" placeholder="50"
+              defaultValue={category.numbeR_OF_DRIVING_LECTURES} required />
+          </Form.Group>
+
+
+
+
           <Row>
             <Col>
               <Link className="btn btn-danger gumb" to={`/categories`}>Cancel</Link>
             </Col>
             <Col>
-            <Button variant="primary" className="gumb" type="submit">
-              CHANGE CATEGORY
-            </Button>
+              <Button variant="primary" className="gumb" type="submit">
+                CHANGE CATEGORY
+              </Button>
             </Col>
           </Row>
         </Form>
 
 
-      
-    </Container>
+
+      </Container>
     );
   }
 }

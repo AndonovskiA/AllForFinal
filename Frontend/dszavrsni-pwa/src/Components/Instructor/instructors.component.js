@@ -9,7 +9,7 @@ export default class Instructors extends Component {
 
   constructor(props) {
     super(props);
-    this.getInstructors = this.getInstructors.bind(this);
+    //this.getInstructors = this.getInstructors.bind(this);
 
     this.state = {
       instructors: [],
@@ -33,9 +33,9 @@ export default class Instructors extends Component {
       });
   }
 
-  async deleteInstructor(ID) {
+  async deleteInstructor(id) {
 
-    const answer = await instructorDataService.delete(ID);
+    const answer = await instructorDataService.delete(id);
     if (answer.ok) {
       this.getInstructors();
     } else {
@@ -58,7 +58,7 @@ export default class Instructors extends Component {
           <thead>
 
             <tr>
-              <th>First name</th>
+              <th>FIRST_NAME</th>
               <th>LAST_NAME</th>
               <th>DRIVER_LICENSE_NUMBER</th>
               <th>EMAIL</th>
@@ -73,22 +73,22 @@ export default class Instructors extends Component {
               <tr key={index}>
                 <td>{instructor.firsT_NAME}</td>
 
-                <td>{instructor.LAST_NAME}</td>
+                <td>{instructor.lasT_NAME}</td>
 
-                <td>{instructor.DRIVER_LICENSE_NUMBER}</td>
+                <td>{instructor.driveR_LICENSE_NUMBER}</td>
 
-                <td>{instructor.EMAIL}</td>
+                <td>{instructor.email}</td>
 
-                <td>{instructor.CONTACT_NUMBER}</td>
+                <td>{instructor.contacT_NUMBER}</td>
 
-                <td> 
+                <td>
                   <Link className="btn btn-primary gumb"
                     to={`/instructors/${instructor.id}`}>
                     <FaEdit />
                   </Link>
 
                   <Button variant="danger" className="gumb"
-                    onClick={() => this.deleteInstructor(instructor.ID)}>
+                    onClick={() => this.deleteInstructor(instructor.id)}>
                     <FaTrash />
                   </Button>
                 </td>

@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 
 
 
@@ -15,7 +15,7 @@ export default class changeVehicle extends Component {
   constructor(props) {
     super(props);
 
-    this.vehicles = this.getVehicles();
+    this.vehicle = this.getVehicle();
     this.changeVehicle = this.changeVehicle.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -25,16 +25,16 @@ export default class changeVehicle extends Component {
   }
 
 
-  async getVehicles() {
-   
+  async getVehicle() {
+
     let href = window.location.href;
-    let niz = href.split('/'); 
-    await vehicleDataService.getByID(niz[niz.length-1])
+    let niz = href.split('/');
+    await vehicleDataService.getByID(niz[niz.length - 1])
       .then(response => {
         this.setState({
           vehicle: response.data
         });
-       console.log(response.data);
+        console.log(response.data);
       })
       .catch(e => {
         console.log(e);
@@ -44,12 +44,12 @@ export default class changeVehicle extends Component {
   async changeVehicle(vehicle) {
 
     let href = window.location.href;
-    let niz = href.split('/'); 
-    const answer = await vehicleDataService.put(niz[niz.length-1],vehicle);
-    if(answer.ok){
-      window.location.href='/vehicles';
-    }else{
-      
+    let niz = href.split('/');
+    const answer = await vehicleDataService.put(niz[niz.length - 1], vehicle);
+    if (answer.ok) {
+      window.location.href = '/vehicles';
+    } else {
+
       console.log(answer);
     }
   }
@@ -60,74 +60,78 @@ export default class changeVehicle extends Component {
     e.preventDefault();
 
     const datainfo = new FormData(e.target);
+    console.log(datainfo.get('date'));
+    console.log(datainfo.get('time'));
+    let datetime = moment.utc(datainfo.get('date') + ' ' + datainfo.get('time'));
+    console.log(datetime);
 
     this.changeVehicle({
-      TYPE: datainfo.get('TYPE'),
-      BRAND: datainfo.get('BRAND'),
-      MODEL: datainfo.get('MODEL'),
-      PURCHASE_DATE: datainfo.get('PURCHASE_DATE'),
-      DATE_OF_REGISTRATION: datainfo.get('DATE_OF_REGISTRATION')
+      type: datainfo.get('type'),
+      brand: datainfo.get('brand'),
+      model: datainfo.get('model'),
+      purchasE_DATE: datetime,
+      datE_OF_REGISTRATION: datetime
     });
-    
+
   }
 
 
   render() {
-    
-    const { vehicle} = this.state;
+
+    const { vehicle } = this.state;
     return (
-    <Container>
+      <Container>
         <Form onSubmit={this.handleSubmit}>
 
-        <Form.Group className="mb-3" controlId="TYPE">
-                <Form.Label>TYPE</Form.Label>
-                <Form.Control type="text" name="TYPE" placeholder="karavan" 
-                 maxLength={50} defaultValue={vehicle.TYPE} required/>
-              </Form.Group>
-    
-    
-              <Form.Group className="mb-3" controlId="BRAND">
-                <Form.Label>BRAND</Form.Label>
-                <Form.Control type="text" name="BRAND"
-                defaultValue={vehicle.BRAND} placeholder="310B" />
-              </Form.Group>
-    
-    
-              <Form.Group className="mb-3" controlId="MODEL">
-                <Form.Label>MODEL</Form.Label>
-                <Form.Control type="text" name="MODEL" 
-                defaultValue={vehicle.MODEL} placeholder="50-1" />
-              </Form.Group>
-    
-              <Form.Group className="mb-3" controlId="PURCHASE_DATE">
-                <Form.Label>PURCHASE_DATE</Form.Label>
-                <Form.Control type="text" name="PURCHASE_DATE" placeholder="" 
-                defaultValue={vehicle.PURCHASE_DATE} required />
-              </Form.Group>
+          <Form.Group className="mb-3" controlId="type">
+            <Form.Label>TYPE</Form.Label>
+            <Form.Control type="text" name="type" placeholder="karavan"
+              maxLength={50} defaultValue={vehicle.type} required />
+          </Form.Group>
 
-              <Form.Group className="mb-3" controlId="DATE_OF_REGISTRATION">
-                <Form.Label>DATE_OF_REGISTRATION</Form.Label>
-                <Form.Control type="text" name="DATE_OF_REGISTRATION" placeholder="12.12.2023." 
-                defaultValue={vehicle.DATE_OF_REGISTRATION} required />
-              </Form.Group>
 
-        
-         
+          <Form.Group className="mb-3" controlId="brand">
+            <Form.Label>BRAND</Form.Label>
+            <Form.Control type="text" name="brand"
+              defaultValue={vehicle.brand} placeholder="310B" />
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="model">
+            <Form.Label>MODEL</Form.Label>
+            <Form.Control type="text" name="model"
+              defaultValue={vehicle.model} placeholder="50-1" />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="datetime">
+            <Form.Label>PURCHASE_DATE</Form.Label>
+            <Form.Control type="date" name="datetime" placeholder=""
+              defaultValue={vehicle.purchasE_DATE} required />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="datetime">
+            <Form.Label>DATE_OF_REGISTRATION</Form.Label>
+            <Form.Control type="date" name="datetime" placeholder=" "
+              defaultValue={vehicle.datE_OF_REGISTRATION} required />
+          </Form.Group>
+
+
+
           <Row>
             <Col>
               <Link className="btn btn-danger gumb" to={`/vehicles`}>Cancel</Link>
             </Col>
             <Col>
-            <Button variant="primary" className="gumb" type="submit">
-              Change vehicle 
-            </Button>
+              <Button variant="primary" className="gumb" type="submit">
+                Change vehicle
+              </Button>
             </Col>
           </Row>
         </Form>
 
 
-      
-    </Container>
+
+      </Container>
     );
   }
 }

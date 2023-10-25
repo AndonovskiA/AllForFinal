@@ -15,7 +15,7 @@ export default class Students extends Component {
   constructor(props) {
     super(props);
 
-    this.addStudent = this.getStudents.bind(this);
+    this.getStudents = this.getStudents.bind(this);
 
     this.state = {
       students: [],
@@ -34,7 +34,7 @@ export default class Students extends Component {
   getStudents() {
     studentDataService.get()
       .then(response => {
-        debugger
+
         this.setState({
           students: response.data
         });
@@ -44,9 +44,9 @@ export default class Students extends Component {
       });
   }
 
-  async deleteStudent(ID) {
+  async deleteStudent(id) {
 
-    const answer = await studentDataService.delete(ID);
+    const answer = await studentDataService.delete(id);
     if (answer.ok) {
       this.getStudents();
     } else {
@@ -70,14 +70,14 @@ export default class Students extends Component {
                 <Card.Body>
                   <Card.Title>{s.firsT_NAME} {s.lasT_NAME}</Card.Title>
                   <Card.Text>
-                    {s.adress} {s.oib} {s.contacT_NUMBER} {s.Date_of_enrollment}
+                    {s.address} {s.oib} {s.contacT_NUMBER} {s.datE_OF_ENROLLMENT}
                   </Card.Text>
                   <Row>
                     <Col>
-                      <Link className="btn btn-primary gumb" to={`/students/${s.ID}`}><FaEdit /></Link>
+                      <Link className="btn btn-primary gumb" to={`/students/${s.id}`}><FaEdit /></Link>
                     </Col>
                     <Col>
-                      <Button variant="danger" className="gumb" onClick={() => this.deleteStudent(s.ID)}><FaTrash /></Button>
+                      <Button variant="danger" className="gumb" onClick={() => this.deleteStudent(s.id)}><FaTrash /></Button>
                     </Col>
                   </Row>
                 </Card.Body>

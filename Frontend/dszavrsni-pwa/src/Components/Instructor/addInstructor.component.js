@@ -32,11 +32,11 @@ export default class addInstructor extends Component {
       const datainfo = new FormData(e.target);
   
       this.addInstructor({
-      FIRST_NAME: datainfo.get('FIRST_NAME'),
-      LAST_NAME: datainfo.get('LAST_NAME'),
-      DRIVER_LICENSE_NUMBER: datainfo.get('DRIVER_LICENSE_NUMBER'),
-      EMAIL: datainfo.get("EMAIL"),
-      CONTACT_NUMBER: datainfo.get('CONTACT_NUMBER'),
+      firsT_NAME: datainfo.get('firsT_NAME'),
+      lasT_NAME: datainfo.get('lasT_NAME'),
+      driveR_LICENSE_NUMBER: datainfo.get('driveR_LICENSE_NUMBER'),
+      email: datainfo.get("email"),
+      contacT_NUMBER: datainfo.get('contacT_NUMBER'),
       });
       
     }
@@ -51,24 +51,24 @@ export default class addInstructor extends Component {
                 <Form.Control type="text" name="first name" placeholder="Petak" maxLength={30}/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="LAST_NAME">
+            <Form.Group className="mb-3" controlId="last name">
                 <Form.Label>LAST_NAME</Form.Label>
-                <Form.Control type="text" name="LAST_NAME" placeholder="Petakić"/>
+                <Form.Control type="text" name="last name" placeholder="Petakić"/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="DRIVES_LICENSE_NUMBER">
+            <Form.Group className="mb-3" controlId="driver license number">
                 <Form.Label>DRIVER_LICENSE_NUMBER</Form.Label>
-                <Form.Control type="text" name="DRIVER_LICENSE_NUMBER"placeholder="6546464 "/>
+                <Form.Control type="text" name="driver license number"placeholder="6546464 "/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="EMAIL">
+            <Form.Group className="mb-3" controlId="email">
                 <Form.Label>EMAIL</Form.Label>
-                <Form.Control type="text" name="EMAIL" placeholder="abcd.pet@gmail.com"/>
+                <Form.Control type="text" name="email" placeholder="abcd.pet@gmail.com"/>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="CONTACT_NUMBER">
+            <Form.Group className="mb-3" controlId="contact number">
                 <Form.Label>CONTACT_NUMBER</Form.Label>
-                <Form.Control type="text" name="CONTACT_NUMBER" placeholder="1234567890"/>
+                <Form.Control type="text" name="contact number" placeholder="1234567890"/>
             </Form.Group>
         
               

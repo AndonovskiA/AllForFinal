@@ -9,7 +9,7 @@ import { FaTrash } from 'react-icons/fa';
 export default class Vehicles extends Component {
     constructor(props) {
       super(props);
-      this.getVehicles= this.getVehicles.bind(this);
+      //this.getVehicles= this.getVehicles.bind(this);
       
       this.state = {
         vehicles: [],
@@ -31,9 +31,9 @@ export default class Vehicles extends Component {
           });
       }
 
-      async deleteVehicle(ID){
+      async deleteVehicle(id){
     
-        const answer = await vehicleDataService.delete(ID);
+        const answer = await vehicleDataService.delete(id);
         if(answer.ok){
          this.getVehicles();
         }else{
@@ -65,23 +65,23 @@ export default class Vehicles extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                   { vehicles && vehicles.map((vehicle,ID)=> (
+                   { vehicles && vehicles.map((vehicle,id)=> (
 
-                    <tr key={ID}>
+                    <tr key={id}>
                          
-                        <td>{vehicle.TYPE}</td>
-                        <td>{vehicle.BRAND}</td>
-                        <td>{vehicle.PURCHASE_DATE}</td>
-                        <td>{vehicle.DATE_OF_REGISTRATION}</td>
+                        <td>{vehicle.type}</td>
+                        <td>{vehicle.brand}</td>
+                        <td>{vehicle.purchasE_DATE}</td>
+                        <td>{vehicle.datE_OF_REGISTRATION}</td>
 
                         <td>
                             <Link className="btn btn-primary gumb"
-                            to={`/vehicles/${vehicle.ID}`}>
+                            to={`/vehicles/${vehicle.id}`}>
                                 <FaEdit />
                             </Link>
 
                             <Button variant="danger" className="gumb"
-                            onClick={()=>this.deleteVehicle(vehicle.ID)}>
+                            onClick={()=>this.deleteVehicle(vehicle.id)}>
                                 <FaTrash />
                             </Button>
 

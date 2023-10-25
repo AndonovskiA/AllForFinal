@@ -2,61 +2,58 @@ import http from '../../http-common';
 
 class studentDataService {
   async get() {
-    return await http.get('/Student');
+    return await http.get('/student');
   }
 
-  async getByID(ID) {
-    return await http.get('/Student/' + ID);
+  async getByID(id) {
+    return await http.get('/student/' + id);
   }
 
-  async post(student){
-    const answer = await http.post('/Student',student)
-       .then(response => {
-         return {ok:true, message: 'Student added'}; 
-       })
-       .catch(error => {
+  async post(student) {
+    const answer = await http.post('/student', student)
+      .then(response => {
+        return { ok: true, message: 'Student added' };
+      })
+      .catch(error => {
         console.log(error.response);
-         return {ok:false, message: error.response.data}; 
-       });
- 
-       return answer;
+        return { ok: false, message: error.response.data };
+      });
+
+    return answer;
   }
 
-  async put(ID,student){
-    const answer = await http.put('/student/' + ID,student)
-       .then(response => {
-         return {ok:true, message: 'Student changed'};
-       })
-       .catch(error => {
+  async put(id, student) {
+    const answer = await http.put('/student/' + id, student)
+      .then(response => {
+        return { ok: true, message: 'Student changed' };
+      })
+      .catch(error => {
         console.log(error.response);
-         return {ok:false, poruka: error.response.data}; 
-       });
- 
-       return answer;
-     }
+        return { ok: false, poruka: error.response.data };
+      });
+
+    return answer;
+  }
 
 
-  async delete(ID){
-    
-    const answer = await http.delete('/Student/' + ID)
-       .then(response => {
-         return {ok:true, message: 'Succesfully deleted student'};
-       })
-       .catch(error => {
-         console.log(error);
-         return {ok:false, message: error.response.data};
-       });
- 
-       return answer;
-     }
+  async delete(id) {
+
+    const answer = await http.delete('/student/' + id)
+      .then(response => {
+        return { ok: true, message: 'Succesfully deleted student' };
+      })
+      .catch(error => {
+        console.log(error);
+        return { ok: false, message: error.response.data };
+      });
+
+    return answer;
+  }
 
 
-     async searchStudent(condition) {
-      console.log('Searching s: ' + condition);
-      return await http.get('/student/search/'+condition);
-    }
-     
- 
+
+
+
 }
 
 export default new studentDataService();
